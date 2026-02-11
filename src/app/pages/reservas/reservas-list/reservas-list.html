@@ -1,1 +1,35 @@
-<p>reservas-list works!</p>
+<section class="mis-reservas">
+  <h1>Mis Reservas</h1>
+
+  <!-- Select para filtrar por mesa -->
+  <div class="filtro-reservas">
+    <label for="mesaSelect">Filtrar por mesa:</label>
+    <select id="mesaSelect" (change)="filtrar($event)">
+      <option>Todas</option>
+      <option>Mesa 1</option>
+      <option>Mesa 2</option>
+      <option>Mesa 3</option>
+      <option>Mesa 4</option>
+    </select>
+  </div>
+
+  <!-- Lista de reservas -->
+  <section class="lista-reservas">
+    @for(reserva of arrReservas(); track $index){
+      <article class="reserva-item">
+        <h2>Reserva {{$index + 1}}</h2>
+        <p><strong>Mesa:</strong> {{ reserva.mesaId }}</p>
+        <p><strong>Fecha y hora:</strong> {{ reserva.fecha }}</p>
+        <p><strong>Personas:</strong> {{ reserva.personas }}</p>
+        <button (click)="cancelarReserva(reserva.id)">Cancelar reserva</button>
+      </article>
+    }
+  </section>
+
+  <!-- Mensaje cuando no hay reservas -->
+  @if(arrReservas().length === 0){
+    <p>No tienes reservas aún.</p>
+  }
+</section>
+
+

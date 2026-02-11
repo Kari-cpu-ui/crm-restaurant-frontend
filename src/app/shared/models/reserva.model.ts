@@ -7,3 +7,4 @@ export interface Reserva {
     mesaId: number; // Número o ID de la mesa
     userId: number; // Usuario que hizo la reserva (opcional)
 }
+

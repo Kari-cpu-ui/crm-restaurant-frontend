@@ -1,0 +1,74 @@
+/* reservas-list.css */
+
+.reservas-list {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f8fc;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.reservas-list h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.reservas-list div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.reservas-list select {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.reservas-list article {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 5px solid #4f46e5; /* color violeta bonito */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reservas-list article:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.reservas-list h2 {
+  margin: 0 0 0.5rem 0;
+  color: #4f46e5;
+  font-size: 1.2rem;
+}
+
+.reservas-list p {
+  margin: 0.2rem 0;
+  color: #555;
+}
+
+.reservas-list button {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #ef4444; /* rojo suave */
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.reservas-list button:hover {
+  background-color: #dc2626;
+}

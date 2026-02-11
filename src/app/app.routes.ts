@@ -39,21 +39,5 @@ export const routes: Routes = [
   { path: '**', redirectTo: '' } // Si la ruta no existe, redirige a HomeComponent
 ];
 
-/*
-------------------------------------------------------
-💡 Explicación:
 
-1️- Cada "path" corresponde a una URL en el navegador.
-   Ejemplo: http://localhost:4200/login → LoginComponent
-2️ Los componentes actualmente están vacíos (solo esqueleto).
-3️- Cuando agreguemos lógica y formularios, Angular mostrará los datos según la ruta.
-4️ La estructura ayuda a que cada uno de nosotros  trabaje en su parte:
-   - Home: cualquier info pública
-   - Auth: login/register
-   - Menús: público/admin
-   - Reservas: creación y visualización
-   - Admin: panel general
-5️ Ruta '**' siempre al final para capturar cualquier URL que no exista y evitar errores.
-------------------------------------------------------
-*/
 
