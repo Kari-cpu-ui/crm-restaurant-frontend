@@ -12,6 +12,7 @@ import { ReservasListComponent } from './pages/reservas/reservas-list/reservas-l
 import { ReservaCreateComponent } from './pages/reservas/reserva-create/reserva-create';
 import { MisReservasComponent } from './pages/reservas/mis-reservas/mis-reservas';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard';
+import { ReviewComponent } from './pages/review/review';
 
 // Defino todas las rutas de la app
 // Esto es solo estructura, no contiene lógica aún
@@ -35,6 +36,9 @@ export const routes: Routes = [
   // PANEL DE ADMIN
   { path: 'admin', component: DashboardComponent }, // Dashboard general de administración
 
+  // REVIEWS
+   { path: 'review', component: ReviewComponent },
+   
   // Ruta comodín
   { path: '**', redirectTo: '' } // Si la ruta no existe, redirige a HomeComponent
 ];

@@ -1,3 +1,14 @@
+<header class="app-header">
+	<nav class="app-nav">
+		<div class="nav-left">
+			<a routerLink="/" class="brand">CRM Restaurante</a>
+		</div>
+		<div class="nav-right">
+			<button class="btn review-btn" (click)="goToReviews()">Reviews</button>
+		</div>
+	</nav>
+</header>
 
-
-<router-outlet />
+<main class="app-main">
+	<router-outlet />
+</main>
