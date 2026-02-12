@@ -7,7 +7,10 @@ import { User } from '../../shared/models/user.model'; // Importamos el modelo d
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService { // Cambie el nombre "Auth a AuthService" para que quede claro
+export class AuthService {
+  logout() {
+    throw new Error('Method not implemented.');
+  } // Cambie el nombre "Auth a AuthService" para que quede claro
   currentUser?: User; // Usuario actualmente logueado
   constructor() {}
 

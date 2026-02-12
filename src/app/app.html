@@ -1,3 +1,4 @@
+
 <header class="app-header">
 	<nav class="app-nav">
 		<div class="nav-left">
@@ -12,3 +13,22 @@
 <main class="app-main">
 	<router-outlet />
 </main>
+
+<header>
+  <h1>Mi Restaurante</h1>
+  <nav>
+    <a routerLink="/">Inicio</a>
+    <a routerLink="/menu">Menú</a>
+    <a routerLink="/login">Login</a>
+    <a routerLink="/register">Registrarse</a>
+    <a routerLink="/dashboard">Dashboard</a>
+  </nav>
+</header>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <p>&copy; 2026 Mi Restaurante</p>
+</footer>
