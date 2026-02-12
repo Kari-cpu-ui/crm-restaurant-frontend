@@ -1,0 +1,27 @@
+<h2>Menús (Admin)</h2>
+
+<div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+  <a routerLink="/menus/create">+ Crear menú</a>
+  <button (click)="loadMenus()">Recargar</button>
+</div>
+
+<p *ngIf="loading">Cargando...</p>
+<p *ngIf="error" style="color:red">{{ error }}</p>
+
+<div *ngIf="!loading && menus.length === 0 && !error">
+  <p>No hay menús todavía.</p>
+</div>
+
+<div *ngFor="let m of menus" style="border:1px solid #ddd; padding:10px; margin:10px 0;">
+  <p><b>Fecha:</b> {{ m.date }}</p>
+  <p><b>Primero:</b> {{ m.first_course }}</p>
+  <p><b>Segundo:</b> {{ m.second_course }}</p>
+  <p><b>Postre:</b> {{ m.dessert }}</p>
+  <p><b>Precio:</b> {{ m.price }} €</p>
+
+  <div style="display:flex; gap:10px; margin-top:8px;">
+    <button (click)="deleteMenu(m.id)">Eliminar</button>
+    <a [routerLink]="['/menus/edit', m.id]">Editar</a>
+  </div>
+</div>
+
