@@ -1,4 +1,5 @@
 /* Reset básico */
+<<<<<<< HEAD
 •⁠ ⁠ {
     margin: 0;
     padding: 0;
@@ -55,10 +56,85 @@ input[type="submit"] {
 button:hover,
 input[type="submit"]:hover {
     background-color: #e64a19;
+=======
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #fefbf6; /* crema suave */
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header y navegación */
+header {
+  background: linear-gradient(90deg, #d84315, #ff5722); /* rojo profesional */
+  color: #fff;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+nav {
+  margin-top: 0.8rem;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.2s;
+}
+
+nav a:hover {
+  color: #ffe0b2; /* naranja suave */
+  transform: scale(1.05);
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Botones */
+button, input[type="submit"] {
+  background-color: #ff5722; /* naranja profesional */
+  border: none;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+button:hover, input[type="submit"]:hover {
+  background-color: #e64a19;
+  transform: translateY(-2px);
+>>>>>>> d2c623d2f50abfe2207acaf8e2bbfbfa1bbce40d
 }
 
 /* Formularios */
 form {
+<<<<<<< HEAD
     background: #fff3e0;
     padding: 2rem;
     border-radius: 10px;
@@ -74,10 +150,35 @@ form textarea {
     margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+=======
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+form input, form select, form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input:focus, form select:focus, form textarea:focus {
+  border-color: #ff5722;
+  box-shadow: 0 0 5px rgba(255,87,34,0.4);
+  outline: none;
+>>>>>>> d2c623d2f50abfe2207acaf8e2bbfbfa1bbce40d
 }
 
 /* Tablas para reservas y menú */
 table {
+<<<<<<< HEAD
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 2rem;
@@ -97,13 +198,96 @@ td {
 
 th {
     background-color: #ffccbc;
+=======
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+table th, table td {
+  padding: 1rem;
+  text-align: left;
+}
+
+table th {
+  background-color: #ff7043;
+  color: #fff;
+  font-weight: 600;
+}
+
+table tr:nth-child(even) {
+  background-color: #fff3e0;
+>>>>>>> d2c623d2f50abfe2207acaf8e2bbfbfa1bbce40d
 }
 
 /* Cards de menú */
 .card {
+<<<<<<< HEAD
     border: 1px solid #ffccbc;
     border-radius: 10px;
     padding: 1rem;
     margin-bottom: 1rem;
     background: #fff3e0;
 }
+=======
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.8rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+  color: #d84315;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.card p {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card button {
+  align-self: flex-start;
+}
+
+/* Footer */
+footer {
+  background-color: #d84315;
+  color: white;
+  text-align: center;
+  padding: 1.5rem 2rem;
+  font-size: 0.95rem;
+  margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav a {
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  .card {
+    padding: 1.2rem;
+  }
+
+  form {
+    padding: 1.5rem;
+  }
+}
+>>>>>>> d2c623d2f50abfe2207acaf8e2bbfbfa1bbce40d

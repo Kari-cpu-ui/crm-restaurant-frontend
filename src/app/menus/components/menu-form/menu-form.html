@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="submit()" style="display:grid; gap:10px; max-width:420px;">
+  <div>
+    <label>Fecha</label><br />
+    <input type="date" formControlName="date" />
+  </div>
+
+  <div>
+    <label>Primer plato</label><br />
+    <input type="text" formControlName="first_course" />
+  </div>
+
+  <div>
+    <label>Segundo plato</label><br />
+    <input type="text" formControlName="second_course" />
+  </div>
+
+  <div>
+    <label>Postre</label><br />
+    <input type="text" formControlName="dessert" />
+  </div>
+
+  <div>
+    <label>Precio</label><br />
+    <input type="number" formControlName="price" />
+  </div>
+
+  <button type="submit">Guardar</button>
+</form>

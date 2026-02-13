@@ -9,6 +9,7 @@ import { User } from '../../shared/models/user.model';
 })
 export class AuthService {
 
+
   currentUser?: User; // Usuario actualmente logueado
 
   constructor() {
