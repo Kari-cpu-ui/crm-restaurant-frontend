@@ -1,1 +1,13 @@
-<p>login works!</p>
+<h2>Iniciar Sesión</h2>
+
+<form [formGroup]="loginForm">
+    <input type="email" placeholder="Correo electrónico" formControlName="email"
+        [style.borderColor]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched ? 'red' : '#ccc'">
+
+    <input type="password" placeholder="Contraseña" formControlName="password"
+        [style.borderColor]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched ? 'red' : '#ccc'">
+
+    <button type="button" (click)="login()" [disabled]="loginForm.invalid">Entrar</button>
+</form>
+
+<p>¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>

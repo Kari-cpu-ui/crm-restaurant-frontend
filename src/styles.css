@@ -1,1 +1,109 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reset básico */
+•⁠ ⁠ {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #fff8f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+header,
+nav,
+footer {
+    background-color: #ff7043;
+    color: white;
+    padding: 1rem 2rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    margin-right: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Botones */
+button,
+input[type="submit"] {
+    background-color: #ff7043;
+    border: none;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #e64a19;
+}
+
+/* Formularios */
+form {
+    background: #fff3e0;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Tablas para reservas y menú */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ccc;
+}
+
+th,
+td {
+    padding: 1rem;
+    text-align: left;
+}
+
+th {
+    background-color: #ffccbc;
+}
+
+/* Cards de menú */
+.card {
+    border: 1px solid #ffccbc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #fff3e0;
+}

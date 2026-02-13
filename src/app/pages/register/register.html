@@ -1,1 +1,16 @@
-<p>register works!</p>
+<h2>Crear Cuenta</h2>
+
+<form [formGroup]="registerForm">
+    <input type="text" placeholder="Nombre completo" formControlName="nombre"
+        [style.borderColor]="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched ? 'red' : '#ccc'">
+
+    <input type="email" placeholder="Correo electrónico" formControlName="email"
+        [style.borderColor]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'red' : '#ccc'">
+
+    <input type="password" placeholder="Contraseña" formControlName="password"
+        [style.borderColor]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'red' : '#ccc'">
+
+    <button type="button" (click)="register()" [disabled]="registerForm.invalid">Registrarse</button>
+</form>
+
+<p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>

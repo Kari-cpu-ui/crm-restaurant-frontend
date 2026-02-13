@@ -1,1 +1,43 @@
-<p>home works!</p>
+<header class="navbar">
+    <div class="navbar__logo">CRM Restaurante</div>
+    <nav class="navbar__menu">
+        <a routerLink="/home">Home</a>
+        <a routerLink="/menus">Menus</a>
+        <a routerLink="/review">Review</a>
+
+        @if (!auth.isLogged()) {
+        <a routerLink="/login">Login</a>
+        <a routerLink="/register">Register</a>
+        }
+
+        @if (auth.isLogged()) {
+        <a routerLink="/reservas">Mis Reservas</a>
+        <button (click)="auth.logout()">Cerrar Sesión</button>
+        }
+
+        @if (auth.isAdmin()) {
+        <a routerLink="/admin">Admin</a>
+        }
+    </nav>
+</header>
+
+<section class="home__hero">
+    <h1>CRM Restaurante</h1>
+    <p>Gestiona tus reservas fácilmente</p>
+
+    <div class="home__actions">
+        @if (!auth.isLogged()) {
+        <button routerLink="/login">Iniciar Sesión</button>
+        <button routerLink="/register">Registrarse</button>
+        }
+
+        @if (auth.isLogged()) {
+        <button routerLink="/reservas">Mis Reservas</button>
+        <button (click)="auth.logout()">Cerrar Sesión</button>
+        }
+
+        @if (auth.isAdmin()) {
+        <button routerLink="/admin">Panel Admin</button>
+        }
+    </div>
+</section>
