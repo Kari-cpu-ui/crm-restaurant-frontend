@@ -1,15 +1,18 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReservaService } from '../../../core/services/reserva';
 import { Reserva } from '../../../shared/models/reserva.model';
+import { AuthService } from '../../../core/services/auth';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-mis-reservas',
   templateUrl: './mis-reservas.html',
   styleUrls: ['./mis-reservas.css'],
   standalone: true,
-  imports: [], 
+  imports: [RouterModule],
 })
 export class MisReservasComponent {
+  constructor(private auth: AuthService, private router: Router) { }
 
   reservasService = inject(ReservaService);
 
@@ -18,7 +21,7 @@ export class MisReservasComponent {
 
   // Cargar reservas al iniciar
   async ngOnInit() {
-    const reservas = await this.reservasService.obtenerReservas(1); 
+    const reservas = await this.reservasService.obtenerReservas(1);
     this.arrReservas.set(reservas);
   }
 
@@ -40,5 +43,15 @@ export class MisReservasComponent {
     if (!reservaId) return;
     await this.reservasService.cancelarReserva(reservaId);
     this.ngOnInit(); // recargar la lista
+  }
+
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
+
+  isLogged(): boolean {
+    return this.auth.isLogged();
   }
 }

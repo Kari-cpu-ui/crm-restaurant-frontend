@@ -1,3 +1,16 @@
+<header class="navbar">
+  <div class="nav-left">
+    <a routerLink="/">Home</a>
+  </div>
+
+  <div class="nav-right">
+    <button class="btn-logout" [hidden]="!isLogged()" (click)="logout()">
+      Logout
+    </button>
+
+  </div>
+</header>
+
 <section class="mis-reservas-page">
   <h2>Mis Reservas</h2>
 

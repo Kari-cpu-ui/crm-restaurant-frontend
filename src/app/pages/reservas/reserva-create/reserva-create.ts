@@ -1,14 +1,19 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReservaService } from '../../../core/services/reserva';
 import { Reserva } from '../../../shared/models/reserva.model';
+import { AuthService } from '../../../core/services/auth';
+import { RouterModule, Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-reserva-create',
+  standalone: true,
   templateUrl: './reserva-create.html',
   styleUrl: './reserva-create.css',
+  imports: [RouterModule],
 })
 export class ReservaCreateComponent {
+  constructor(private auth: AuthService, private router: Router) { }
 
   reservasService = inject(ReservaService);
 
@@ -37,5 +42,14 @@ export class ReservaCreateComponent {
     } else {
       alert('La mesa no está disponible en esa fecha');
     }
+  }
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
+
+  isLogged(): boolean {
+    return this.auth.isLogged();
   }
 }
