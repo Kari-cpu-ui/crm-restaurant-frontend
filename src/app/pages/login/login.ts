@@ -26,5 +26,9 @@ export class LoginComponent {
       alert('Completa todos los campos.');
     }
   }
+
+  goToRegister(): void {
+    this.router.navigate(['/register']);
+  }
 }
 

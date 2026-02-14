@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Menu } from '../../models/menu';
+import { Menu } from '../interfaces/Menu';
 
 @Component({
   selector: 'app-menu-form',

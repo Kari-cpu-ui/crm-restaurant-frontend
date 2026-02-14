@@ -1,41 +1,29 @@
-<h2>Crear Reserva</h2>
+<section class="reserva-create-page">
+  <h2>Crear Reserva</h2>
 
-<form>
-  <!-- Fecha -->
-  <label for="fecha">Fecha:</label>
-  <input 
-    id="fecha" 
-    type="date" 
-    [value]="nuevaReserva().fecha" 
-    (input)="nuevaReserva.set({ ...nuevaReserva(), fecha: $any($event.target).value })"
-  />
+  <div class="reserva-form-container">
+    <label>
+      Mesa:
+      <input type="text" id="mesaId" placeholder="ID de la mesa">
+    </label>
 
-  <!-- Personas -->
-  <label for="personas">Personas:</label>
-  <input 
-    id="personas" 
-    type="number" 
-    min="1" 
-    [value]="nuevaReserva().personas" 
-    (input)="nuevaReserva.set({ ...nuevaReserva(), personas: +$any($event.target).value })"
-  />
+    <label>
+      Fecha:
+      <input type="date" id="fecha">
+    </label>
 
-  <!-- Mesa -->
-  <label for="mesa">Mesa:</label>
-  <input 
-    id="mesa" 
-    type="number" 
-    min="1" 
-    [value]="nuevaReserva().mesaId" 
-    (input)="nuevaReserva.set({ ...nuevaReserva(), mesaId: +$any($event.target).value })"
-  />
+    <label>
+      Hora:
+      <input type="time" id="hora">
+    </label>
 
-  <!-- User ID (oculto) -->
-  <input 
-    type="hidden" 
-    [value]="nuevaReserva().userId" 
-  />
+    <label>
+      Personas:
+      <input type="number" id="personas" min="1" placeholder="Número de personas">
+    </label>
 
-  <!-- Botón Crear Reserva -->
-  <button type="button" (click)="crearReserva()">Crear Reserva</button>
-</form>
+    <button type="button" class="btn-auth" (click)="crearReserva()">
+      Crear Reserva
+    </button>
+  </div>
+</section>

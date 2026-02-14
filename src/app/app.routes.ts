@@ -37,11 +37,8 @@ export const routes: Routes = [
   { path: 'admin', component: DashboardComponent }, // Dashboard general de administración
 
   // REVIEWS
-   { path: 'review', component: ReviewComponent },
-   
+  { path: 'review', component: ReviewComponent },
+
   // Ruta comodín
   { path: '**', redirectTo: '' } // Si la ruta no existe, redirige a HomeComponent
 ];
-
-
-

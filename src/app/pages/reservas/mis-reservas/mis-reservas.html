@@ -1,41 +1,33 @@
-<h2>Mis Reservas</h2>
+<section class="mis-reservas-page">
+  <h2>Mis Reservas</h2>
 
-<!-- Reserva 1 -->
-<div>
-  <p>Mesa: {{ arrReservas()[0]?.mesaId || '' }}</p>
-  <p>Fecha: {{ arrReservas()[0]?.fecha || '' }}</p>
-  <p>Personas: {{ arrReservas()[0]?.personas || '' }}</p>
-  <button type="button" (click)="cancelarReserva(arrReservas()[0]?.id)">Cancelar</button>
-</div>
+  <!-- Reserva 1 -->
+  <div class="reserva-card">
+    <div class="reserva-info">
+      <p><strong>Mesa:</strong> {{ arrReservas()[0]?.mesaId || '' }}</p>
+      <p><strong>Fecha:</strong> {{ arrReservas()[0]?.fecha || '' }}</p>
+      <p><strong>Personas:</strong> {{ arrReservas()[0]?.personas || '' }}</p>
+    </div>
+    <button type="button" class="btn-reserva-small" (click)="cancelarReserva(arrReservas()[0]?.id)">Cancelar</button>
+  </div>
 
-<!-- Reserva 2 -->
-<div>
-  <p>Mesa: {{ arrReservas()[1]?.mesaId || '' }}</p>
-  <p>Fecha: {{ arrReservas()[1]?.fecha || '' }}</p>
-  <p>Personas: {{ arrReservas()[1]?.personas || '' }}</p>
-  <button type="button" (click)="cancelarReserva(arrReservas()[1]?.id)">Cancelar</button>
-</div>
+  <!-- Reserva 2 -->
+  <div class="reserva-card">
+    <div class="reserva-info">
+      <p><strong>Mesa:</strong> {{ arrReservas()[1]?.mesaId || '' }}</p>
+      <p><strong>Fecha:</strong> {{ arrReservas()[1]?.fecha || '' }}</p>
+      <p><strong>Personas:</strong> {{ arrReservas()[1]?.personas || '' }}</p>
+    </div>
+    <button type="button" class="btn-reserva-small" (click)="cancelarReserva(arrReservas()[1]?.id)">Cancelar</button>
+  </div>
 
-<!-- Reserva 3 -->
-<div>
-  <p>Mesa: {{ arrReservas()[2]?.mesaId || '' }}</p>
-  <p>Fecha: {{ arrReservas()[2]?.fecha || '' }}</p>
-  <p>Personas: {{ arrReservas()[2]?.personas || '' }}</p>
-  <button type="button" (click)="cancelarReserva(arrReservas()[2]?.id)">Cancelar</button>
-</div>
-
-<!-- Reserva 4 -->
-<div>
-  <p>Mesa: {{ arrReservas()[3]?.mesaId || '' }}</p>
-  <p>Fecha: {{ arrReservas()[3]?.fecha || '' }}</p>
-  <p>Personas: {{ arrReservas()[3]?.personas || '' }}</p>
-  <button type="button" (click)="cancelarReserva(arrReservas()[3]?.id)">Cancelar</button>
-</div>
-
-<!-- Reserva 5 -->
-<div>
-  <p>Mesa: {{ arrReservas()[4]?.mesaId || '' }}</p>
-  <p>Fecha: {{ arrReservas()[4]?.fecha || '' }}</p>
-  <p>Personas: {{ arrReservas()[4]?.personas || '' }}</p>
-  <button type="button" (click)="cancelarReserva(arrReservas()[4]?.id)">Cancelar</button>
-</div>
+  <!-- Reserva 3 -->
+  <div class="reserva-card">
+    <div class="reserva-info">
+      <p><strong>Mesa:</strong> {{ arrReservas()[2]?.mesaId || '' }}</p>
+      <p><strong>Fecha:</strong> {{ arrReservas()[2]?.fecha || '' }}</p>
+      <p><strong>Personas:</strong> {{ arrReservas()[2]?.personas || '' }}</p>
+    </div>
+    <button type="button" class="btn-reserva-small" (click)="cancelarReserva(arrReservas()[2]?.id)">Cancelar</button>
+  </div>
+</section>

@@ -1,24 +1,22 @@
-<section class="home__hero">
-    <h1>CRM Restaurante</h1>
-    <p>Gestiona tus reservas fácilmente</p>
+<header class="navbar">
+    <div class="nav-left">
+        <a routerLink="/menu">Carta</a>
+        <a routerLink="/mis-reservas" (click)="verMisReservas()">Reservas</a>
+        <a routerLink="/review">Reseñas</a>
+        <a routerLink="">Sobre nosotros</a>
+    </div>
 
-    <div class="home__actions">
-        @if (!auth.isLogged()) {
-        <button routerLink="/login">Iniciar Sesión</button>
-        <button routerLink="/register">Registrarse</button>
-        }
+    <div class="nav-right">
+        <button (click)="goToLogin()">Login</button>
+        <button class="btn-register" (click)="goToRegister()">Registro</button>
+    </div>
 
-        @if (auth.isLogged()) {
-        <button routerLink="/reservas">Mis Reservas</button>
-        <button (click)="auth.logout()">Cerrar Sesión</button>
-        }
+</header>
 
-        @if (auth.isAdmin()) {
-        <button routerLink="/admin">Panel Admin</button>
-        }
+<section class="hero">
+    <div class="overlay">
+        <h1 class="logo">TERRA ROSSA</h1>
+        <p class="subtitle">No inventamos la pizza, protegemos su alma.</p>
+        <button class="btn-reserva" (click)="hacerReserva()">RESERVA</button>
     </div>
 </section>
-
-<h2>Bienvenido a nuestro restaurante</h2>
-<p>Disfruta de los mejores platos y haz tu reserva en línea.</p>
-<button routerLink="/reserva-create">Reservar Ahora</button>

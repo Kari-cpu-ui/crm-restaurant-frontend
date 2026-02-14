@@ -1,35 +1,25 @@
-<section class="mis-reservas">
-  <h1>Mis Reservas</h1>
+<section class="reservas-list-page">
+  <h2>Lista de Reservas (Administradores)</h2>
 
-  <!-- Select para filtrar por mesa -->
-  <div class="filtro-reservas">
-    <label for="mesaSelect">Filtrar por mesa:</label>
-    <select id="mesaSelect" (change)="filtrar($event)">
-      <option>Todas</option>
-      <option>Mesa 1</option>
-      <option>Mesa 2</option>
-      <option>Mesa 3</option>
-      <option>Mesa 4</option>
-    </select>
+  <!-- Reserva 1 -->
+  <div class="reserva-card">
+    <div class="reserva-info">
+      <p><strong>ID:</strong> {{ arrReservas()[0]?.id || '' }}</p>
+      <p><strong>Mesa:</strong> {{ arrReservas()[0]?.mesaId || '' }}</p>
+      <p><strong>Fecha:</strong> {{ arrReservas()[0]?.fecha || '' }}</p>
+      <p><strong>Personas:</strong> {{ arrReservas()[0]?.personas || '' }}</p>
+    </div>
+    <button type="button" class="btn-reserva-small" (click)="cancelarReserva(arrReservas()[0]?.id)">Cancelar</button>
   </div>
 
-  <!-- Lista de reservas -->
-  <section class="lista-reservas">
-    @for(reserva of arrReservas(); track $index){
-      <article class="reserva-item">
-        <h2>Reserva {{$index + 1}}</h2>
-        <p><strong>Mesa:</strong> {{ reserva.mesaId }}</p>
-        <p><strong>Fecha y hora:</strong> {{ reserva.fecha }}</p>
-        <p><strong>Personas:</strong> {{ reserva.personas }}</p>
-        <button (click)="cancelarReserva(reserva.id)">Cancelar reserva</button>
-      </article>
-    }
-  </section>
-
-  <!-- Mensaje cuando no hay reservas -->
-  @if(arrReservas().length === 0){
-    <p>No tienes reservas aún.</p>
-  }
+  <!-- Reserva 2 -->
+  <div class="reserva-card">
+    <div class="reserva-info">
+      <p><strong>ID:</strong> {{ arrReservas()[1]?.id || '' }}</p>
+      <p><strong>Mesa:</strong> {{ arrReservas()[1]?.mesaId || '' }}</p>
+      <p><strong>Fecha:</strong> {{ arrReservas()[1]?.fecha || '' }}</p>
+      <p><strong>Personas:</strong> {{ arrReservas()[1]?.personas || '' }}</p>
+    </div>
+    <button type="button" class="btn-reserva-small" (click)="cancelarReserva(arrReservas()[1]?.id)">Cancelar</button>
+  </div>
 </section>
-
-

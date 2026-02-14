@@ -1,17 +1,19 @@
 import { Component, signal } from '@angular/core';
-import { Router, RouterOutlet, RouterLink } from '@angular/router';
+import { Router, RouterOutlet, RouterLink, RouterModule } from '@angular/router';
 import { AuthService } from './core/services/auth';
+import { HomeComponent } from "./pages/home/home";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink],
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, HomeComponent, RouterModule],
   templateUrl: './app.html',
   styleUrls: ['./app.css']  // Corregido
 })
 export class App {
   protected readonly title = signal('crm-restaurante');
 
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(private router: Router, private auth: AuthService) { }
 
   logout() {
     try {

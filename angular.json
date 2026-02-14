@@ -19,14 +19,16 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/favicon.ico",
+              "src/assets",
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/public"
               }
             ],
             "styles": [
               "src/styles.css"
-
             ]
           },
           "configurations": {

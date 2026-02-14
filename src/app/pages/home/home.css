@@ -1,68 +1,109 @@
+/* Reset básico para evitar scroll horizontal */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    width: 100%;
+    overflow-x: hidden;
+    /* evita scroll horizontal */
+}
+
 /* Navbar */
 .navbar {
+    width: 100%;
+    /* 100% del contenedor, no 100vw */
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
+    /* izquierda y derecha */
     align-items: center;
-    background-color: palegoldenrod;
-    padding: 10px 20px;
-    color: black;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.navbar__logo {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.navbar__menu {
+.nav-left,
+.nav-right {
     display: flex;
     gap: 15px;
-    align-items: center;
 }
 
-.navbar__menu a,
-.navbar__menu button {
-    color: white;
+.nav-left a,
+.nav-right a {
     text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    background: none;
-    border: none;
+    color: #333;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.btn-register {
+    background-color: #e63946;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.navbar__menu a:hover,
-.navbar__menu button:hover {
-    background-color: #2f2f45;
+.btn-register:hover {
+    background-color: #d62828;
 }
 
-/* Hero Section */
-.home__hero {
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    /* altura completa de la ventana */
+    background-image: url('/assets/images/pizza-home.jpg');
+    /* tu imagen de fondo */
+    background-size: cover;
+    /* cubre todo el contenedor */
+    background-position: center;
+    /* centra la imagen */
+    background-repeat: no-repeat;
+    /* no repetir */
+    position: relative;
+    /* para superponer overlay */
+    display: flex;
+    align-items: center;
+    /* centra verticalmente */
+    justify-content: center;
+    /* centra horizontalmente */
+    color: white;
+    /* texto en blanco */
     text-align: center;
-    padding: 80px 20px;
-    background-color: #f5f5f5;
+    /* centra el texto */
 }
 
-.home__hero h1 {
-    font-size: 36px;
-    margin-bottom: 15px;
+.hero .overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* capa semi-transparente sobre la imagen */
+    padding: 50px;
+    border-radius: 10px;
 }
 
-.home__hero p {
-    font-size: 18px;
+.hero .logo {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.hero .subtitle {
+    font-size: 1.5rem;
     margin-bottom: 30px;
 }
 
-.home__actions button {
-    margin: 0 10px;
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    background-color: #1e1e2f;
+.hero .btn-reserva {
+    background-color: #e63946;
     color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
-.home__actions button:hover {
-    background-color: #2f2f45;
+.hero .btn-reserva:hover {
+    background-color: #d62828;
 }
