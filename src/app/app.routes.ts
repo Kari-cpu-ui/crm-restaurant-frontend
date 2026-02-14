@@ -1,44 +1,43 @@
-// Importo las rutas de Angular
 import { Routes } from '@angular/router';
 
-// Importo TODOS los componentes creados
-// Estos son los "esqueletos" de las pantallas de nuestra app
 import { HomeComponent } from './pages/home/home';
 import { LoginComponent } from './pages/login/login';
 import { RegisterComponent } from './pages/register/register';
-import { MenuListComponent } from './pages/menus/menu-list/menu-list';
+import { MenuPublicComponent } from './pages/menus/menu-public/menu-public';
 import { MenuAdminComponent } from './pages/menus/menu-admin/menu-admin';
 import { ReservasListComponent } from './pages/reservas/reservas-list/reservas-list';
 import { ReservaCreateComponent } from './pages/reservas/reserva-create/reserva-create';
 import { MisReservasComponent } from './pages/reservas/mis-reservas/mis-reservas';
-import { DashboardComponent } from './pages/admin/dashboard/dashboard';
+import { AdminDashboardComponent } from './pages/admin/dashboard/dashboard';
 import { ReviewComponent } from './pages/review/review';
+import { MenuCreateComponent } from './pages/menus/menu-create/menu-create';
+import { MenuEditComponent } from './pages/menus/menu-edit/menu-edit';
+import { MenuFormComponent } from './pages/menus/menu-form/menu-form';
 
-// Defino todas las rutas de la app
-// Esto es solo estructura, no contiene lógica aún
 export const routes: Routes = [
-  // Ruta principal o "home"
-  { path: '', component: HomeComponent }, // Cuando entramos a la raíz "/", se muestra HomeComponent
-
-  // AUTENTICACIÓN
-  { path: 'login', component: LoginComponent },    // Pantalla de inicio de sesión
-  { path: 'register', component: RegisterComponent }, // Pantalla de registro de usuarios
-
-  // MENÚS
-  { path: 'menus', component: MenuListComponent }, // Lista pública de menús
-  { path: 'menus/admin', component: MenuAdminComponent }, // Panel admin para CRUD de menús
-
-  // RESERVAS
-  { path: 'reservas', component: ReservasListComponent }, // Lista de todas las reservas (solo visual)
-  { path: 'reservas/nueva', component: ReservaCreateComponent }, // Formulario para crear nueva reserva
-  { path: 'mis-reservas', component: MisReservasComponent }, // Reservas propias del usuario (ver/cancelar)
-
-  // PANEL DE ADMIN
-  { path: 'admin', component: DashboardComponent }, // Dashboard general de administración
-
-  // REVIEWS
+  // Rutas públicas
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'menus', component: MenuPublicComponent },
+  { path: 'menus/admin', component: MenuAdminComponent },
+  { path: 'reservas', component: ReservasListComponent },
+  { path: 'reservas/nueva', component: ReservaCreateComponent },
+  { path: 'mis-reservas', component: MisReservasComponent },
   { path: 'review', component: ReviewComponent },
 
-  // Ruta comodín
-  { path: '**', redirectTo: '' } // Si la ruta no existe, redirige a HomeComponent
+  // Dashboard de administración con rutas hijas
+  {
+    path: 'admin',
+    component: AdminDashboardComponent,
+    children: [
+      { path: 'menu-create', component: MenuCreateComponent },
+      { path: 'menu-edit', component: MenuEditComponent },
+      { path: 'menu-form', component: MenuFormComponent },
+      { path: 'reservas', component: ReservasListComponent }
+    ]
+  },
+
+  // Ruta comodín (404)
+  { path: '**', redirectTo: '' }
 ];

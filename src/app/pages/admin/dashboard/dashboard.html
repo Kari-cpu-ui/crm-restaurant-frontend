@@ -1,0 +1,59 @@
+<div class="admin-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2 class="logo">Admin Panel</h2>
+
+        <ul class="menu">
+            <li routerLink="/menus/admin">Gestionar los menus</li>
+            <li routerLink="/reservas">Reservas</li>
+            <li (click)="setSection('usuarios')">Usuarios</li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <!-- MENU CREATE -->
+        <div [style.display]="section === 'menu-create' ? 'block' : 'none'">
+            <h2>Crear Nuevo Plato</h2>
+            <p>Aquí irá el formulario para crear platos.</p>
+        </div>
+
+        <!-- MENU EDIT -->
+        <div [style.display]="section === 'menu-edit' ? 'block' : 'none'">
+            <h2>Editar Menú</h2>
+            <p>Aquí se mostrará la lista editable de platos.</p>
+        </div>
+
+        <!-- MENU FORM -->
+        <div [style.display]="section === 'menu-form' ? 'block' : 'none'">
+            <h2>Formulario del Menú</h2>
+            <p>Configuración avanzada del menú.</p>
+        </div>
+
+        <!-- RESERVAS -->
+        <div [style.display]="section === 'reservas' ? 'block' : 'none'">
+            <h2>Lista de Reservas</h2>
+            <div [innerHTML]="reservasHTML"></div>
+        </div>
+
+        <!-- USUARIOS -->
+        <div [style.display]="section === 'usuarios' ? 'block' : 'none'">
+            <h2>Usuarios y Administradores</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+
+                        <th>Email</th>
+
+                        <th>Rol</th>
+                    </tr>
+                </thead>
+                <tbody [innerHTML]="usersHTML"></tbody>
+            </table>
+        </div>
+
+    </main>
+</div>

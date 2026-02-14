@@ -1,14 +1,17 @@
 import { Component, signal } from '@angular/core';
 import { Reserva } from '../../../shared/models/reserva.model';
+import { AuthService } from '../../../core/services/auth';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservas-list',
   templateUrl: './reservas-list.html',
   styleUrls: ['./reservas-list.css'],
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
 })
 export class ReservasListComponent {
+  constructor(private auth: AuthService, private router: Router) { }
 
   // Señal para guardar las reservas
   arrReservas = signal<Reserva[]>([]);
