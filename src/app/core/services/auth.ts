@@ -2,57 +2,78 @@
 // aquí hay que implementar login, logout y verificación de sesión
 
 import { Injectable } from '@angular/core';
-import { User } from '../../shared/models/user.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
 
+  register(nombre: string, email: string, password: string): void {
 
-  currentUser?: User; // Usuario actualmente logueado
+    const user = {
+      nombre,
+      email,
+      role: 'user'
+    };
 
-  constructor() {
-    this.loadUserFromStorage();
-  }
-
-  // 🔐 Login
-  login(user: User): void {
-    this.currentUser = user;
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('logged', 'true');
+    localStorage.setItem('role', 'user');
   }
 
-  // 🚪 Logout
-  logout(): void {
-    this.currentUser = undefined;
-    localStorage.removeItem('user');
+  login(email: string, password: string): void {
+
+    if (email === 'admin@test.com' && password === '1234') {
+
+      const adminUser = {
+        nombre: 'Administrador',
+        email,
+        role: 'admin'
+      };
+
+      localStorage.setItem('user', JSON.stringify(adminUser));
+      localStorage.setItem('logged', 'true');
+      localStorage.setItem('role', 'admin');
+
+    } else {
+
+      const user = {
+        nombre: 'Usuario',
+        email,
+        role: 'user'
+      };
+
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('logged', 'true');
+      localStorage.setItem('role', 'user');
+    }
   }
+
 
   // ✅ Verificar si hay sesión activa
   isLogged(): boolean {
-    return !!this.currentUser;
+    return localStorage.getItem('logged') === 'true';
   }
 
   // 👑 Verificar si es administrador
   isAdmin(): boolean {
-    return this.currentUser?.role === 'ADMIN';
+    return localStorage.getItem('role') === 'admin';
   }
 
-  // 🔄 Recuperar usuario al recargar la página
-  private loadUserFromStorage(): void {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      this.currentUser = JSON.parse(storedUser);
-    }
+  // Obtener rol actual
+  getUser() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  logout(): void {
+    localStorage.removeItem('logged');
+    localStorage.removeItem('role');
+    localStorage.removeItem('user');
   }
 
 }
-
-
-
-
-// TODO: implementar login
-// TODO: implementar logout
-// TODO: implementar verificacion de token/session
-
-

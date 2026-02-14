@@ -1,10 +1,26 @@
+<header class="navbar">
+    <div class="nav-left">
+        <a routerLink="/">Home</a>
+    </div>
+</header>
+
 <section class="auth-page">
     <div class="auth-container">
         <h2>Registro</h2>
-        <input type="text" placeholder="Nombre completo">
-        <input type="email" placeholder="Correo electrónico">
-        <input type="password" placeholder="Contraseña">
-        <button class="btn-auth">Registrarse</button>
-        <p>¿Ya tienes cuenta? <a routerLink="/login" (click)="goToLogin()">Inicia sesión</a></p>
+
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+            <input type="text" placeholder="Nombre" formControlName="nombre">
+            <input type="email" placeholder="Correo electrónico" formControlName="email">
+            <input type="password" placeholder="Contraseña" formControlName="password">
+
+            <button type="submit" class="btn-auth">Crear cuenta</button>
+
+        </form>
+
+        <p>¿Ya tienes cuenta?
+            <a routerLink="/login">Inicia sesión</a>
+        </p>
+
     </div>
 </section>

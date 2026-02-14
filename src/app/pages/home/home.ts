@@ -38,6 +38,16 @@ export class HomeComponent {
   goToRegister(): void {
     this.router.navigate(['/register']);
   }
+
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
+
+  isLogged(): boolean {
+    return this.auth.isLogged();
+  }
 }
 
 

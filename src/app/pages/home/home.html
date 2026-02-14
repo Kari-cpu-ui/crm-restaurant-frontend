@@ -1,17 +1,30 @@
 <header class="navbar">
     <div class="nav-left">
-        <a routerLink="/menu">Carta</a>
+        <a routerLink="/menus">Carta</a>
         <a routerLink="/mis-reservas" (click)="verMisReservas()">Reservas</a>
         <a routerLink="/review">Reseñas</a>
         <a routerLink="">Sobre nosotros</a>
     </div>
 
     <div class="nav-right">
-        <button (click)="goToLogin()">Login</button>
-        <button class="btn-register" (click)="goToRegister()">Registro</button>
-    </div>
 
+        <!-- Login y Registro visibles solo si NO está logado -->
+        <button [hidden]="isLogged()" (click)="goToLogin()">
+            Login
+        </button>
+
+        <button class="btn-register" [hidden]="isLogged()" (click)="goToRegister()">
+            Registro
+        </button>
+
+        <!-- Logout visible solo si está logado -->
+        <button class="btn-logout" [hidden]="!isLogged()" (click)="logout()">
+            Logout
+        </button>
+
+    </div>
 </header>
+
 
 <section class="hero">
     <div class="overlay">
