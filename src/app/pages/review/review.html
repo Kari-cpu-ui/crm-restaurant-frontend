@@ -10,31 +10,45 @@
   <form class="review-form">
     <div>
       <label>Reserva ID
-        <input type="text" name="bookingId" [value]="newBookingId()" (input)="newBookingId.set($any($event.target).value)" required />
+        <input type="number" name="reservationId" [value]="newReservationId()" (input)="newReservationId.set(+$any($event.target).value)" required />
+      </label>
+    </div>
+    <div>
+      <label>Puntuación
+        <div class="star-rating">
+          @for (star of [1, 2, 3, 4, 5]; track star) {
+            <span class="star" [class.filled]="star <= newRating()" (click)="setRating(star)">★</span>
+          }
+        </div>
       </label>
     </div>
     <div>
       <label>Comentario
-        <textarea name="comment" [value]="newComment()" (input)="newComment.set($any($event.target).value)" required></textarea>
+        <textarea name="comment" [value]="newComment()" (input)="newComment.set($any($event.target).value)" maxlength="500" required></textarea>
       </label>
     </div>
     <div>
-      <button type="button" (click)="addReview()" [disabled]="!newBookingId() || !newComment()">Guardar reseña</button>
+      <button type="button" (click)="addReview()" [disabled]="!newReservationId() || !newComment() || newRating() < 1">Guardar reseña</button>
     </div>
   </form>
 </div>
 <section class="reviews-section">
   <div class="cards-grid">
-    @for (r of reviews(); track r.bookingId) {
+    @for (r of reviews(); track r.reservation_id) {
       <article class="card">
         <header class="card-header">
-          <div class="booking-id">Reserva: <span>{{ r.bookingId }}</span></div>
+          <div class="booking-id">Reserva: <span>{{ r.reservation_id }}</span></div>
+          <div class="rating">
+            @for (star of [1, 2, 3, 4, 5]; track star) {
+              <span class="star" [class.filled]="star <= r.rating">★</span>
+            }
+          </div>
         </header>
         <div class="card-body">
           <p class="comment">{{ r.comment }}</p>
         </div>
         <footer class="card-footer">
-          <small class="note">Gracias por tu opinión</small>
+          <small class="note">{{ r.created_at | date:'dd/MM/yyyy HH:mm' }}</small>
         </footer>
       </article>
     }

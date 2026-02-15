@@ -2,11 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from "@angular/router";
-
-export interface Review {
-  comment: string;
-  bookingId: string;
-}
+import { Review } from '../../shared/models/review.model';
 
 @Component({
   selector: 'app-review',
@@ -17,20 +13,35 @@ export interface Review {
 export class ReviewComponent {
 
   newComment = signal('');
-  newBookingId = signal('');
+  newReservationId = signal<number | null>(null);
+  newRating = signal<number>(0);
 
   readonly reviews = signal<Review[]>([
-    { comment: 'Muy buen servicio, todo perfecto.', bookingId: 'RES-1001' },
-    { comment: 'La comida estaba muy rica y el servicio fue excelente.', bookingId: 'RES-1002' },
-    { comment: 'La cocción de la carne fue perfecta', bookingId: 'RES-1003' },
+    { id: 1, reservation_id: 1001, rating: 5, comment: 'Muy buen servicio, todo perfecto.', created_at: '2026-02-10T12:00:00' },
+    { id: 2, reservation_id: 1002, rating: 4, comment: 'La comida estaba muy rica y el servicio fue excelente.', created_at: '2026-02-11T14:30:00' },
+    { id: 3, reservation_id: 1003, rating: 5, comment: 'La cocción de la carne fue perfecta', created_at: '2026-02-12T20:00:00' },
   ]);
 
+  setRating(value: number): void {
+    this.newRating.set(value);
+  }
+
   addReview(): void {
-    const comment = this.newComment() && this.newComment().trim();
-    const bookingId = this.newBookingId() && this.newBookingId().trim();
-    if (!comment || !bookingId) return;
-    this.reviews.update(list => [...list, { comment, bookingId }]);
+    const comment = this.newComment()?.trim();
+    const reservationId = this.newReservationId();
+    const rating = this.newRating();
+    if (!comment || !reservationId || rating < 1 || rating > 5) return;
+
+    const review: Review = {
+      reservation_id: reservationId,
+      rating,
+      comment,
+      created_at: new Date().toISOString(),
+    };
+
+    this.reviews.update(list => [...list, review]);
     this.newComment.set('');
-    this.newBookingId.set('');
+    this.newReservationId.set(null);
+    this.newRating.set(0);
   }
 }
