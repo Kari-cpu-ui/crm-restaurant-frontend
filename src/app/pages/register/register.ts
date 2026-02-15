@@ -36,13 +36,12 @@ export class RegisterComponent {
     const { nombre, email, password } = this.registerForm.value;
 
     this.auth.register(nombre, email, password).subscribe({
-      next: () => {
-        alert('Usuario registrado exitosamente');
-        this.router.navigate(['/login']);
+      next: (res) => {
+        console.log('Usuario registrado', res);
+        this.router.navigate(['/mis-reservas']);
       },
       error: err => {
-        console.error('Error registrando usuario', err);
-        alert('Error registrando usuario. Revisa la consola.');
+        alert(err.message);
       }
     });
   }
