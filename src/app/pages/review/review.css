@@ -26,7 +26,7 @@
   padding: 14px 16px;
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
   border: 1px solid rgba(16,24,40,0.06);
-  border-left: 6px solid #ff7a18;
+  border-left: 6px solid #ff69b4;
   display: flex;
   flex-direction: column;
   transition: transform 160ms ease, box-shadow 160ms ease;
@@ -104,7 +104,7 @@
 }
 
 .review-form button {
-  background: #ff7a18;
+  background: #ff69b4;
   color: #fff;
   border: none;
   padding: 8px 14px;
@@ -116,6 +116,38 @@
 
 .review-form button:disabled {
   opacity: 0.5;
+  cursor: default;
+}
+
+/* Star rating */
+.star-rating {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.star {
+  font-size: 28px;
+  cursor: pointer;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #ccc;
+  transition: color 150ms ease, -webkit-text-stroke 150ms ease;
+}
+
+.star.filled {
+  color: #ff69b4;
+  -webkit-text-stroke: 1.5px #ff69b4;
+}
+
+/* Stars in review cards (read-only) */
+.card-header .rating {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.card-header .rating .star {
+  font-size: 18px;
   cursor: default;
 }
 
