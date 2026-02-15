@@ -1,79 +1,49 @@
-// Servicio que maneja la autenticación de usuarios
-// aquí hay que implementar login, logout y verificación de sesión
-
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+
+interface LoginResponse {
+  access_token: string;
+  token_type: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  register(nombre: string, email: string, password: string): void {
+  private apiUrl = 'http://127.0.0.1:8000/users/auth';
 
-    const user = {
-      nombre,
-      email,
-      role: 'user'
-    };
+  constructor(private http: HttpClient, private router: Router) { }
 
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('logged', 'true');
-    localStorage.setItem('role', 'user');
+  // Registro
+  register(nombre: string, email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, { name: nombre, email, password });
   }
 
-  login(email: string, password: string): void {
-
-    if (email === 'admin@test.com' && password === '1234') {
-
-      const adminUser = {
-        nombre: 'Administrador',
-        email,
-        role: 'admin'
-      };
-
-      localStorage.setItem('user', JSON.stringify(adminUser));
-      localStorage.setItem('logged', 'true');
-      localStorage.setItem('role', 'admin');
-
-    } else {
-
-      const user = {
-        nombre: 'Usuario',
-        email,
-        role: 'user'
-      };
-
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('logged', 'true');
-      localStorage.setItem('role', 'user');
-    }
+  // Login
+  login(email: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { email, password })
+      .pipe(
+        tap(res => {
+          localStorage.setItem('token', res.access_token);
+          localStorage.setItem('logged', 'true');
+        })
+      );
   }
 
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('logged');
+    this.router.navigate(['/']);
+  }
 
-  // ✅ Verificar si hay sesión activa
   isLogged(): boolean {
     return localStorage.getItem('logged') === 'true';
   }
 
-  // 👑 Verificar si es administrador
-  isAdmin(): boolean {
-    return localStorage.getItem('role') === 'admin';
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
-
-  // Obtener rol actual
-  getUser() {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
-  }
-
-  getRole(): string | null {
-    return localStorage.getItem('role');
-  }
-
-  logout(): void {
-    localStorage.removeItem('logged');
-    localStorage.removeItem('role');
-    localStorage.removeItem('user');
-  }
-
 }

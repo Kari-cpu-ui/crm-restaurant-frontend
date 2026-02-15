@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../core/services/auth';
 
@@ -11,6 +11,7 @@ import { AuthService } from '../../core/services/auth';
   styleUrls: ['./register.css']
 })
 export class RegisterComponent {
+
   registerForm: FormGroup;
 
   constructor(
@@ -18,17 +19,15 @@ export class RegisterComponent {
     private router: Router,
     private auth: AuthService
   ) {
-
     this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-
   }
 
+  // Registrar usuario
   register(): void {
-
     if (this.registerForm.invalid) {
       alert('Completa correctamente el formulario');
       return;
@@ -36,8 +35,15 @@ export class RegisterComponent {
 
     const { nombre, email, password } = this.registerForm.value;
 
-    this.auth.register(nombre, email, password);
-
-    this.router.navigate(['/mis-reservas']);
+    this.auth.register(nombre, email, password).subscribe({
+      next: () => {
+        alert('Usuario registrado exitosamente');
+        this.router.navigate(['/login']);
+      },
+      error: err => {
+        console.error('Error registrando usuario', err);
+        alert('Error registrando usuario. Revisa la consola.');
+      }
+    });
   }
 }
