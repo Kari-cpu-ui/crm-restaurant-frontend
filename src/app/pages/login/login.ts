@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../core/services/auth';
 
@@ -19,16 +19,13 @@ export class LoginComponent {
     private router: Router,
     private auth: AuthService
   ) {
-
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-
   }
 
   login(): void {
-
     if (this.loginForm.invalid) {
       alert('Completa correctamente el formulario');
       return;
@@ -36,21 +33,22 @@ export class LoginComponent {
 
     const { email, password } = this.loginForm.value;
 
-    // No esperamos retorno
-    this.auth.login(email, password);
-
-    // Redirigimos directamente
-    this.router.navigate(['/mis-reservas']);
+    this.auth.login(email, password).subscribe({
+      next: () => {
+        this.router.navigate(['/mis-reservas']);
+      },
+      error: err => {
+        console.error('Error login', err);
+        alert('Email o contraseña incorrectos');
+      }
+    });
   }
-
 
   logout(): void {
     this.auth.logout();
-    this.router.navigate(['/']);
   }
 
   isLogged(): boolean {
     return this.auth.isLogged();
   }
-
 }

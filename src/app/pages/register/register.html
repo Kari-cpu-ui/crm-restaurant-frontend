@@ -8,13 +8,13 @@
     <div class="auth-container">
         <h2>Registro</h2>
 
-        <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <form [formGroup]="registerForm">
 
             <input type="text" placeholder="Nombre" formControlName="nombre">
             <input type="email" placeholder="Correo electrónico" formControlName="email">
             <input type="password" placeholder="Contraseña" formControlName="password">
 
-            <button type="submit" class="btn-auth">Crear cuenta</button>
+            <button type="button" class="btn-auth" (click)="register()">Crear cuenta</button>
 
         </form>
 
