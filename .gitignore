@@ -9,3 +9,7 @@ node_modules/
 dist/
 886158a (Actualización de vistas y funcionalidades del frontend)
 
+
+
+# Environment con URL real (no subir al repo)
+src/environments/environment.ts
