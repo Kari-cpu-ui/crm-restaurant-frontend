@@ -7,34 +7,36 @@
 <div class="review-page">
   <h2>Reseñas</h2>
   <p>Aquí puedes dejar o ver reseñas.</p>
-  <form class="review-form" (ngSubmit)="addReview()" #reviewForm="ngForm">
+  <form class="review-form">
     <div>
       <label>Reserva ID
-        <input type="text" name="bookingId" [(ngModel)]="newBookingId" required />
+        <input type="text" name="bookingId" [value]="newBookingId()" (input)="newBookingId.set($any($event.target).value)" required />
       </label>
     </div>
     <div>
       <label>Comentario
-        <textarea name="comment" [(ngModel)]="newComment" required></textarea>
+        <textarea name="comment" [value]="newComment()" (input)="newComment.set($any($event.target).value)" required></textarea>
       </label>
     </div>
     <div>
-      <button type="submit" [disabled]="!newBookingId || !newComment">Guardar reseña</button>
+      <button type="button" (click)="addReview()" [disabled]="!newBookingId() || !newComment()">Guardar reseña</button>
     </div>
   </form>
 </div>
 <section class="reviews-section">
   <div class="cards-grid">
-    <article class="card" *ngFor="let r of reviews()">
-      <header class="card-header">
-        <div class="booking-id">Reserva: <span>{{ r.bookingId }}</span></div>
-      </header>
-      <div class="card-body">
-        <p class="comment">{{ r.comment }}</p>
-      </div>
-      <footer class="card-footer">
-        <small class="note">Gracias por tu opinión</small>
-      </footer>
-    </article>
+    @for (r of reviews(); track r.bookingId) {
+      <article class="card">
+        <header class="card-header">
+          <div class="booking-id">Reserva: <span>{{ r.bookingId }}</span></div>
+        </header>
+        <div class="card-body">
+          <p class="comment">{{ r.comment }}</p>
+        </div>
+        <footer class="card-footer">
+          <small class="note">Gracias por tu opinión</small>
+        </footer>
+      </article>
+    }
   </div>
 </section>

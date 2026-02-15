@@ -16,8 +16,8 @@ export interface Review {
 })
 export class ReviewComponent {
 
-  newComment = '';
-  newBookingId = '';
+  newComment = signal('');
+  newBookingId = signal('');
 
   readonly reviews = signal<Review[]>([
     { comment: 'Muy buen servicio, todo perfecto.', bookingId: 'RES-1001' },
@@ -26,11 +26,11 @@ export class ReviewComponent {
   ]);
 
   addReview(): void {
-    const comment = this.newComment && this.newComment.trim();
-    const bookingId = this.newBookingId && this.newBookingId.trim();
+    const comment = this.newComment() && this.newComment().trim();
+    const bookingId = this.newBookingId() && this.newBookingId().trim();
     if (!comment || !bookingId) return;
     this.reviews.update(list => [...list, { comment, bookingId }]);
-    this.newComment = '';
-    this.newBookingId = '';
+    this.newComment.set('');
+    this.newBookingId.set('');
   }
 }
