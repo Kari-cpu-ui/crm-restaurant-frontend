@@ -10,6 +10,7 @@ import { Menu } from '../interfaces/Menu';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './menu-list.html',
+  styleUrl: './menu-list.css',
 })
 export class MenuListComponent implements OnInit {
   menus: Menu[] = [];
