@@ -11,53 +11,69 @@ import { RouterLink } from "@angular/router";
 })
 export class AdminDashboardComponent implements OnInit {
 
-  section: string = 'menu-create'; // Sección activa
-  usersHTML: string = '';           // HTML dinámico de usuarios
-  reservasHTML: string = '';        // HTML dinámico de reservas
+  section: string = 'menu-create';
 
-  private API_BASE = 'http://127.0.0.1:8000'; // Base de la API
+  private API_BASE = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.loadUsers();    // Carga usuarios desde la DB
-    this.loadReservas(); // Carga reservas desde la DB
+    // Inicialmente no cargamos usuarios ni reservas
   }
 
-  /** Cambiar sección visible en el dashboard */
   setSection(section: string): void {
     this.section = section;
+
+    if (section === 'usuarios') {
+      this.loadUsers();
+    }
+
+    if (section === 'reservas') {
+      this.loadReservas();
+    }
   }
 
-  /** Cargar usuarios desde la API */
+  // Cargar usuarios desde la DB
   loadUsers(): void {
     this.http.get<any[]>(`${this.API_BASE}/users/`).subscribe({
       next: (data) => {
-        this.usersHTML = data.map(user => {
-          const roleClass = user.role === 'administrador' ? 'admin' : '';
-          return `<tr>
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td class="${roleClass}">${user.role}</td>
-                  </tr>`;
-        }).join('');
+        let html = '';
+        data.forEach(user => {
+          html += `
+<tr>
+  <td>${user.name}</td>
+  <td>${user.email}</td>
+  <td class="${user.is_admin ? 'admin' : 'user'}">
+    ${user.is_admin ? 'Administrador' : 'Usuario'}
+  </td>
+</tr>
+`;
+        });
+        const tbody = document.getElementById('users-tbody');
+        if (tbody) tbody.innerHTML = html;
       },
       error: (err) => console.error('Error cargando usuarios', err)
     });
   }
 
-  /** Cargar reservas desde la API */
+  // Cargar reservas desde la DB
   loadReservas(): void {
-    this.http.get<any[]>(`${this.API_BASE}/reservas/`).subscribe({
+    this.http.get<any[]>(`${this.API_BASE}/reservations/`).subscribe({
       next: (data) => {
-        this.reservasHTML = data.map(reserva => {
-          return `<tr>
-                    <td>${reserva.cliente}</td>
-                    <td>${reserva.fecha}</td>
-                    <td>${reserva.mesa}</td>
-                    <td>${reserva.estado}</td>
-                  </tr>`;
-        }).join('');
+        let html = '';
+        data.forEach(reserva => {
+          html += `
+<tr>
+  <td>${reserva.customer_name}</td>
+  <td>${reserva.date}</td>
+  <td>${reserva.table_id}</td>
+  <td>${reserva.guests}</td>
+  <td>${reserva.status}</td>
+</tr>
+`;
+        });
+        const tbody = document.getElementById('reservas-tbody');
+        if (tbody) tbody.innerHTML = html;
       },
       error: (err) => console.error('Error cargando reservas', err)
     });

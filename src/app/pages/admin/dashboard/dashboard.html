@@ -1,12 +1,17 @@
+<header class="navbar">
+    <div class="nav-left">
+        <a routerLink="/">Home</a>
+    </div>
+</header>
+
 <div class="admin-container">
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <h2 class="logo">Admin Panel</h2>
-
         <ul class="menu">
-            <li routerLink="/menus/admin">Gestionar los menus</li>
-            <li routerLink="/reservas">Reservas</li>
+            <li (click)="setSection('menu-create')">Gestionar los menus</li>
+            <li (click)="setSection('reservas')">Reservas</li>
             <li (click)="setSection('usuarios')">Usuarios</li>
         </ul>
     </aside>
@@ -35,23 +40,32 @@
         <!-- RESERVAS -->
         <div [style.display]="section === 'reservas' ? 'block' : 'none'">
             <h2>Lista de Reservas</h2>
-            <div [innerHTML]="reservasHTML"></div>
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Mesa</th>
+                        <th>Comensales</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="reservas-tbody"></tbody>
+            </table>
         </div>
 
         <!-- USUARIOS -->
         <div [style.display]="section === 'usuarios' ? 'block' : 'none'">
             <h2>Usuarios y Administradores</h2>
-            <table>
+            <table class="users-table">
                 <thead>
                     <tr>
                         <th>Nombre</th>
-
                         <th>Email</th>
-
                         <th>Rol</th>
                     </tr>
                 </thead>
-                <tbody [innerHTML]="usersHTML"></tbody>
+                <tbody id="users-tbody"></tbody>
             </table>
         </div>
 

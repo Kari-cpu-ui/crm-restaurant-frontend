@@ -4,6 +4,11 @@
         <a routerLink="/mis-reservas" (click)="verMisReservas()">Reservas</a>
         <a routerLink="/review">Reseñas</a>
         <a routerLink="">Sobre nosotros</a>
+        <a routerLink="/admin" [hidden]="!isAdmin()">Admin</a>
+        <!-- <button class="btn-admin" [hidden]="!isAdmin()" routerLink="/admin">
+            Admin
+        </button> -->
+
     </div>
 
     <div class="nav-right">

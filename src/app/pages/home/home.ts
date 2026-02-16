@@ -48,6 +48,11 @@ export class HomeComponent {
   isLogged(): boolean {
     return this.auth.isLogged();
   }
+
+  isAdmin(): boolean {
+    return this.auth.isAdmin();
+  }
+
 }
 
 

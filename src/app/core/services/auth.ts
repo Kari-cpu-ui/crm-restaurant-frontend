@@ -7,6 +7,7 @@ import { catchError, tap } from 'rxjs/operators';
 interface LoginResponse {
   access_token: string;
   token_type: string;
+  is_admin: boolean;
 }
 
 @Injectable({
@@ -36,6 +37,7 @@ export class AuthService {
           // Guardamos token solo si login fue exitoso
           localStorage.setItem('token', res.access_token);
           localStorage.setItem('logged', 'true');
+          localStorage.setItem('is_admin', String(res.is_admin));
         }),
         catchError(this.handleError)
       );
@@ -46,6 +48,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('logged');
+    localStorage.removeItem('is_admin');
     this.router.navigate(['/']);
   }
 
@@ -59,15 +62,10 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  isAdmin(): boolean {
+    return localStorage.getItem('is_admin') === 'true';
+  }
 
-  // Manejo de errores
-  // private handleError(error: HttpErrorResponse) {
-  //   let message = 'Error desconocido';
-  //   if (error.error?.detail) {
-  //     message = error.error.detail; // Mensajes del backend FastAPI
-  //   }
-  //   return throwError(() => new Error(message));
-  // }
 
   private handleError(error: any) {
     console.error('Error en AuthService:', error);

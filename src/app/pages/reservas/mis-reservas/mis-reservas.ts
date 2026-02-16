@@ -25,6 +25,7 @@ export class MisReservasComponent {
     this.arrReservas.set(reservas);
   }
 
+
   // Filtrar por mesa
   filtrar($event: Event) {
     const htmlElement = $event.target as HTMLSelectElement;
