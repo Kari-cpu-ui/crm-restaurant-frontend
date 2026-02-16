@@ -13,10 +13,12 @@ import { ReviewComponent } from './pages/review/review';
 import { MenuCreateComponent } from './pages/menus/menu-create/menu-create';
 import { MenuEditComponent } from './pages/menus/menu-edit/menu-edit';
 import { MenuFormComponent } from './pages/menus/menu-form/menu-form';
-import { MenuListComponent } from './pages/menus/menu-list/menu-list';
+
+// ✅ IMPORTA ABOUT
+import { AboutComponent } from './pages/about/about';
 
 export const routes: Routes = [
-  // Rutas públicas
+  // Rutas publicas:
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -26,7 +28,9 @@ export const routes: Routes = [
   { path: 'reservas/nueva', component: ReservaCreateComponent },
   { path: 'mis-reservas', component: MisReservasComponent },
   { path: 'review', component: ReviewComponent },
-  { path: 'menu-list', component: MenuListComponent },
+
+  // ✅ SOBRE NOSOTROS
+  { path: 'sobre-nosotros', component: AboutComponent },
 
   // Dashboard de administración con rutas hijas
   {
@@ -36,10 +40,10 @@ export const routes: Routes = [
       { path: 'menu-create', component: MenuCreateComponent },
       { path: 'menu-edit', component: MenuEditComponent },
       { path: 'menu-form', component: MenuFormComponent },
-      { path: 'reservas', component: ReservasListComponent }
-    ]
+      { path: 'reservas', component: ReservasListComponent },
+    ],
   },
 
   // Ruta comodín (404)
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];
