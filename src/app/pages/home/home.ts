@@ -15,7 +15,7 @@ export class HomeComponent {
   hacerReserva() {
     if (this.auth.isLogged()) {
       // Usuarios logados pueden crear reserva
-      this.router.navigate(['/reservas-create']);
+      this.router.navigate(['/reservas/nueva']);
     } else {
       alert('Debes iniciar sesión para hacer una reserva.');
       this.router.navigate(['/login']);
