@@ -1,3 +1,16 @@
+<header class="navbar">
+  <div class="nav-left">
+    <a routerLink="/">Home</a>
+  </div>
+
+  <div class="nav-right">
+    <button class="btn-logout" [hidden]="!isLogged()" (click)="logout()">
+      Logout
+    </button>
+
+  </div>
+</header>
+
 <section class="menu-page">
   <h2>Carta · Menús de la semana</h2>
   <p class="subtitle">3 menús fijos, con 3 platos por día. Sin calendario.</p>

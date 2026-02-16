@@ -13,6 +13,7 @@ import { ReviewComponent } from './pages/review/review';
 import { MenuCreateComponent } from './pages/menus/menu-create/menu-create';
 import { MenuEditComponent } from './pages/menus/menu-edit/menu-edit';
 import { MenuFormComponent } from './pages/menus/menu-form/menu-form';
+import { MenuListComponent } from './pages/menus/menu-list/menu-list';
 
 export const routes: Routes = [
   // Rutas públicas
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: 'reservas/nueva', component: ReservaCreateComponent },
   { path: 'mis-reservas', component: MisReservasComponent },
   { path: 'review', component: ReviewComponent },
+  { path: 'menu-list', component: MenuListComponent },
 
   // Dashboard de administración con rutas hijas
   {

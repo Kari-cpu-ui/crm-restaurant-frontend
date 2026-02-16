@@ -4,11 +4,13 @@ import { RouterLink } from '@angular/router';
 
 import { MenuService } from '../menu';
 import { Menu } from '../interfaces/Menu';
+import { AuthService } from '../../../core/services/auth';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterModule],
   templateUrl: './menu-list.html',
 })
 export class MenuListComponent implements OnInit {
@@ -16,7 +18,7 @@ export class MenuListComponent implements OnInit {
   loading = false;
   error = '';
 
-  constructor(private menuService: MenuService) { }
+  constructor(private menuService: MenuService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadMenus();
@@ -48,6 +50,15 @@ export class MenuListComponent implements OnInit {
       next: () => this.loadMenus(),
       error: () => alert('Error borrando menú'),
     });
+  }
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
+
+  isLogged(): boolean {
+    return this.auth.isLogged();
   }
 }
 
