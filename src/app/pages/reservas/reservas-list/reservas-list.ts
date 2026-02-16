@@ -20,9 +20,9 @@ export class ReservasListComponent {
   ngOnInit() {
     // Datos de prueba
     this.arrReservas.set([
-      { id: 1, mesaId: 2, fecha: '2026-02-08 20:00', personas: 4, userId: 1 },
-      { id: 2, mesaId: 1, fecha: '2026-02-09 18:30', personas: 2, userId: 1 },
-      { id: 3, mesaId: 3, fecha: '2026-02-10 21:00', personas: 5, userId: 1 },
+      { id: 1, table_id: 2, date: '2026-02-08', guests: 4, customer_name: '1' },
+      { id: 2, table_id: 1, date: '2026-02-09', guests: 2, customer_name: '1' },
+      { id: 3, table_id: 3, date: '2026-02-10', guests: 5, customer_name: '1' },
     ]);
   }
 
@@ -30,7 +30,7 @@ export class ReservasListComponent {
   filtrar($event: Event) {
     const mesa = ($event.target as HTMLSelectElement).value;
     if (mesa === 'Todas') return this.ngOnInit();
-    const filtradas = this.arrReservas().filter(r => r.mesaId === Number(mesa));
+    const filtradas = this.arrReservas().filter(r => r.table_id === Number(mesa));
     this.arrReservas.set(filtradas);
   }
 

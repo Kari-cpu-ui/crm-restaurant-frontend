@@ -18,22 +18,23 @@
   <div class="reserva-form-container">
     <label>
       Mesa:
-      <input type="text" id="mesaId" placeholder="ID de la mesa">
+      <input type="number" id="table_id" placeholder="ID de la mesa"
+        [value]="nuevaReserva().table_id"
+        (input)="actualizarCampo('table_id', $event)">
     </label>
 
     <label>
       Fecha:
-      <input type="date" id="fecha">
-    </label>
-
-    <label>
-      Hora:
-      <input type="time" id="hora">
+      <input type="date" id="date"
+        [value]="nuevaReserva().date"
+        (input)="actualizarCampo('date', $event)">
     </label>
 
     <label>
       Personas:
-      <input type="number" id="personas" min="1" placeholder="Número de personas">
+      <input type="number" id="guests" min="1" placeholder="Número de personas"
+        [value]="nuevaReserva().guests"
+        (input)="actualizarCampo('guests', $event)">
     </label>
 
     <button type="button" class="btn-auth" (click)="crearReserva()">

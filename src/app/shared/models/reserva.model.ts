@@ -2,9 +2,10 @@
 // Se usará en componentes de menú y en el servicio MenuService
 export interface Reserva {
     id?: number; // ID de la reserva 
-    fecha: string; // Fecha y hora de la reserva 
-    personas: number; // Número de personas
-    mesaId: number; // Número o ID de la mesa
-    userId: number; // Usuario que hizo la reserva (opcional)
+    table_id: number; // FK a mesa
+    customer_name: string; // FK a usuario (string para el backend)
+    date: string; // Fecha de la reserva
+    guests: number; // Cantidad de personas
+    status?: string; // Estado de la reserva (default: 'active')
 }
 

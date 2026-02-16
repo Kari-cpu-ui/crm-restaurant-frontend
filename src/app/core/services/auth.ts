@@ -38,6 +38,12 @@ export class AuthService {
           localStorage.setItem('token', res.access_token);
           localStorage.setItem('logged', 'true');
           localStorage.setItem('is_admin', String(res.is_admin));
+
+          // Extraer y guardar user ID del token
+          try {
+            const payload = JSON.parse(atob(res.access_token.split('.')[1]));
+            localStorage.setItem('user_id', String(payload.user_id));
+          } catch { }
         }),
         catchError(this.handleError)
       );
@@ -49,6 +55,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('logged');
     localStorage.removeItem('is_admin');
+    localStorage.removeItem('user_id');
     this.router.navigate(['/']);
   }
 
@@ -64,6 +71,23 @@ export class AuthService {
 
   isAdmin(): boolean {
     return localStorage.getItem('is_admin') === 'true';
+  }
+
+  // Obtener el ID del usuario desde localStorage o token JWT
+  getUserId(): string | null {
+    // Primero intentar desde localStorage
+    const storedId = localStorage.getItem('user_id');
+    if (storedId) return storedId;
+
+    // Fallback: decodificar del token
+    const token = this.getToken();
+    if (!token) return null;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.user_id ? String(payload.user_id) : null;
+    } catch {
+      return null;
+    }
   }
 
 

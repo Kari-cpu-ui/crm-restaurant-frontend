@@ -18,29 +18,54 @@ export class ReservaCreateComponent {
   reservasService = inject(ReservaService);
 
   nuevaReserva = signal<Reserva>({
-    fecha: '',
-    personas: 1,
-    mesaId: 1,
-    userId: 1,
+    table_id: 1,
+    customer_name: '',
+    date: '',
+    guests: 1,
   });
 
-  async ngOnInit() {
+  ngOnInit() {
+    const userId = this.auth.getUserId() ?? '';
+    this.nuevaReserva.update(r => ({ ...r, customer_name: userId }));
+
     // para  cargar reservas existentes para verificar disponibilidad
-    const todasReservas: Reserva[] = await this.reservasService.obtenerReservas(this.nuevaReserva().userId);
-    console.log('Reservas existentes:', todasReservas);
+    this.reservasService.obtenerReservas(userId).subscribe({
+      next: (todasReservas) => console.log('Reservas existentes:', todasReservas),
+      error: (err) => console.error('Error al obtener reservas:', err)
+    });
   }
 
-  async crearReserva() {
+  crearReserva() {
     const reserva = this.nuevaReserva();
 
     // Comprobar disponibilidad antes de crear
-    const reservasExistentes: Reserva[] = await this.reservasService.obtenerReservas(reserva.userId);
-    if (this.reservasService.estaDisponible(reserva.mesaId, reserva.fecha, reservasExistentes)) {
-      const res = await this.reservasService.crearReserva(reserva);
-      console.log('Reserva creada:', res);
-      alert('Reserva creada con éxito');
+    this.reservasService.obtenerReservas(reserva.customer_name).subscribe({
+      next: (reservasExistentes) => {
+        if (this.reservasService.estaDisponible(reserva.table_id, reserva.date, reservasExistentes)) {
+          this.reservasService.crearReserva(reserva).subscribe({
+            next: (res) => {
+              console.log('Reserva creada:', res);
+              alert('Reserva creada con éxito');
+              this.router.navigate(['/mis-reservas']);
+            },
+            error: (err) => console.error('Error al crear reserva:', err)
+          });
+        } else {
+          alert('La mesa no está disponible en esa fecha');
+        }
+      },
+      error: (err) => console.error('Error al verificar disponibilidad:', err)
+    });
+  }
+
+  actualizarCampo(campo: string, event: Event) {
+    const valor = (event.target as HTMLInputElement).value;
+    const reservaActual = this.nuevaReserva();
+
+    if (campo === 'table_id' || campo === 'guests') {
+      this.nuevaReserva.set({ ...reservaActual, [campo]: Number(valor) });
     } else {
-      alert('La mesa no está disponible en esa fecha');
+      this.nuevaReserva.set({ ...reservaActual, [campo]: valor });
     }
   }
 

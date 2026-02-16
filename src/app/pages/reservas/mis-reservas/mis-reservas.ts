@@ -20,9 +20,13 @@ export class MisReservasComponent {
   arrReservas = signal<Reserva[]>([]);
 
   // Cargar reservas al iniciar
-  async ngOnInit() {
-    const reservas = await this.reservasService.obtenerReservas(1);
-    this.arrReservas.set(reservas);
+  ngOnInit() {
+    const userId = this.auth.getUserId();
+    if (!userId) return;
+    this.reservasService.obtenerReservas(userId).subscribe({
+      next: (reservas) => this.arrReservas.set(reservas),
+      error: (err) => console.error('Error al obtener reservas:', err)
+    });
   }
 
 
@@ -34,16 +38,18 @@ export class MisReservasComponent {
     if (mesa === 'Todas') {
       this.ngOnInit(); // recargar todas las reservas
     } else {
-      const filtradas = this.arrReservas().filter(r => r.mesaId === Number(mesa));
+      const filtradas = this.arrReservas().filter(r => r.table_id === Number(mesa));
       this.arrReservas.set(filtradas);
     }
   }
 
   // Cancelar una reserva
-  async cancelarReserva(reservaId?: number) {
+  cancelarReserva(reservaId?: number) {
     if (!reservaId) return;
-    await this.reservasService.cancelarReserva(reservaId);
-    this.ngOnInit(); // recargar la lista
+    this.reservasService.cancelarReserva(reservaId).subscribe({
+      next: () => this.ngOnInit(), // recargar la lista
+      error: (err) => console.error('Error al cancelar reserva:', err)
+    });
   }
 
 

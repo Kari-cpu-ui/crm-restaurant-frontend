@@ -12,9 +12,9 @@
   <div class="reserva-card">
     <div class="reserva-info">
       <p><strong>ID:</strong> {{ arrReservas()[0]?.id || '' }}</p>
-      <p><strong>Mesa:</strong> {{ arrReservas()[0]?.mesaId || '' }}</p>
-      <p><strong>Fecha:</strong> {{ arrReservas()[0]?.fecha || '' }}</p>
-      <p><strong>Personas:</strong> {{ arrReservas()[0]?.personas || '' }}</p>
+      <p><strong>Mesa:</strong> {{ arrReservas()[0]?.table_id || '' }}</p>
+      <p><strong>Fecha:</strong> {{ arrReservas()[0]?.date || '' }}</p>
+      <p><strong>Personas:</strong> {{ arrReservas()[0]?.guests || '' }}</p>
     </div>
     <button type="button" class="btn-reserva-small" (click)="cancelarReserva(arrReservas()[0]?.id)">Cancelar</button>
   </div>
@@ -23,9 +23,9 @@
   <div class="reserva-card">
     <div class="reserva-info">
       <p><strong>ID:</strong> {{ arrReservas()[1]?.id || '' }}</p>
-      <p><strong>Mesa:</strong> {{ arrReservas()[1]?.mesaId || '' }}</p>
-      <p><strong>Fecha:</strong> {{ arrReservas()[1]?.fecha || '' }}</p>
-      <p><strong>Personas:</strong> {{ arrReservas()[1]?.personas || '' }}</p>
+      <p><strong>Mesa:</strong> {{ arrReservas()[1]?.table_id || '' }}</p>
+      <p><strong>Fecha:</strong> {{ arrReservas()[1]?.date || '' }}</p>
+      <p><strong>Personas:</strong> {{ arrReservas()[1]?.guests || '' }}</p>
     </div>
     <button type="button" class="btn-reserva-small" (click)="cancelarReserva(arrReservas()[1]?.id)">Cancelar</button>
   </div>
