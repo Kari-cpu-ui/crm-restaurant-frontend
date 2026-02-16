@@ -12,6 +12,7 @@ import { RouterModule, Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterLink, RouterModule],
   templateUrl: './menu-list.html',
+  styleUrl: './menu-list.css',
 })
 export class MenuListComponent implements OnInit {
   menus: Menu[] = [];

@@ -1,97 +1,135 @@
 .menu-page {
-  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 18px;
+}
+
+.menu-page h2 {
+  text-align: center;
+  margin: 0 0 8px 0;
 }
 
 .subtitle {
-  margin: 6px 0 16px 0;
+  text-align: center;
+  margin: 0 0 18px 0;
   opacity: 0.8;
 }
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 18px;
   margin-top: 16px;
 }
 
 .menu-card {
-  display: flex;
-  gap: 14px;
-  padding: 14px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  overflow: hidden;
+  border-radius: 18px;
   background: #fff;
-  align-items: flex-start;
+  border: 1px solid rgba(0, 0, 0, 0.10);
 
   cursor: pointer;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 .menu-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.10);
 }
 
-.menu-img {
-  width: 120px;
-  height: 120px;
+/* MUY importante: si algún CSS global pone img { width:100% }, aquí lo controlamos */
+.menu-card .menu-img {
+  width: 100% !important;
+  height: 100%;
+  min-height: 220px;
   object-fit: cover;
-  border-radius: 10px;
-  flex: 0 0 auto;
+  display: block;
 }
 
 .menu-info {
-  width: 100%;
+  padding: 16px 16px 14px;
 }
 
 .menu-head {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 12px;
   margin-bottom: 10px;
 }
 
 .menu-head h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .days {
   display: flex;
-  gap: 6px;
   flex-wrap: wrap;
+  gap: 8px;
 }
 
 .day {
   font-size: 12px;
-  padding: 4px 8px;
+  font-weight: 700;
+  padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.03);
+  white-space: nowrap;
 }
 
 .day-block {
-  margin: 10px 0;
-  padding-top: 8px;
-  border-top: 1px dashed rgba(0, 0, 0, 0.15);
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px dashed rgba(0, 0, 0, 0.15);
 }
 
 .day-block h4 {
-  margin: 0 0 6px 0;
+  margin: 0 0 8px 0;
   font-size: 14px;
 }
 
 .day-block ul {
+  list-style: none;
   margin: 0;
-  padding-left: 18px;
+  padding: 0;
 }
 
 .day-block li {
-  margin: 3px 0;
+  margin: 6px 0;
+  padding-left: 14px;
+  position: relative;
+}
+
+.day-block li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .menu-price {
-  margin-top: 10px;
-  font-weight: 700;
+  margin-top: 14px;
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Responsive: en móvil, imagen arriba */
+@media (max-width: 820px) {
+  .menu-card {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-card .menu-img {
+    min-height: 200px;
+  }
 }
