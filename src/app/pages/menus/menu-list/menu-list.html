@@ -1,19 +1,125 @@
-<header class="navbar">
-  <div class="nav-left">
-    <a routerLink="/">Home</a>
-  </div>
-</header>
-
 <section class="menu-page">
-  <h2>Lista de Menús</h2>
+  <h2>Carta · Menús de la semana</h2>
+  <p class="subtitle">3 menús fijos, con 3 platos por día. Sin calendario.</p>
 
-  <div class="menu-card">
-    <p><b>Fecha:</b> 2026-02-15</p>
-    <p><b>Platos:</b> Pizza, Ensalada</p>
-  </div>
+  <div class="menu-grid">
 
-  <div class="menu-card">
-    <p><b>Fecha:</b> 2026-02-16</p>
-    <p><b>Platos:</b> Pasta, Sopa</p>
+    <!-- MENÚ 1: SÁBADO, DOMINGO, LUNES -->
+    <article class="menu-card">
+      <img class="menu-img" src="assets/images/pizza-margarita.png" alt="Menú Sábado a Lunes" />
+
+      <div class="menu-info">
+        <div class="menu-head">
+          <h3>Menú 1</h3>
+          <div class="days">
+            <span class="day">Sáb</span>
+            <span class="day">Dom</span>
+            <span class="day">Lun</span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <h4>Sábado</h4>
+          <ul>
+            <li>Pizza Mediterránea</li>
+            <li>Ensalada de rúcula y parmesano</li>
+            <li>Gelato de vainilla</li>
+          </ul>
+        </div>
+
+        <div class="day-block">
+          <h4>Domingo</h4>
+          <ul>
+            <li>Pizza 4 Quesos</li>
+            <li>Minestrone</li>
+            <li>Tiramisú</li>
+          </ul>
+        </div>
+
+        <div class="day-block">
+          <h4>Lunes</h4>
+          <ul>
+            <li>Pizza Margarita</li>
+            <li>Pan de ajo</li>
+            <li>Panna cotta</li>
+          </ul>
+        </div>
+
+        <p class="menu-price">12,90 €</p>
+      </div>
+    </article>
+
+
+    <!-- MENÚ 2: MARTES, MIÉRCOLES -->
+    <article class="menu-card">
+      <img class="menu-img" src="assets/images/pizza-mediterranea.png" alt="Menú Martes y Miércoles" />
+
+      <div class="menu-info">
+        <div class="menu-head">
+          <h3>Menú 2</h3>
+          <div class="days">
+            <span class="day">Mar</span>
+            <span class="day">Mié</span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <h4>Martes</h4>
+          <ul>
+            <li>Provolone al horno</li>
+            <li>Pizza Margarita</li>
+            <li>Brownie</li>
+          </ul>
+        </div>
+
+        <div class="day-block">
+          <h4>Miércoles</h4>
+          <ul>
+            <li>Pizza Mediterránea</li>
+            <li>Ensalada Caprese</li>
+            <li>Cheesecake</li>
+          </ul>
+        </div>
+
+        <p class="menu-price">11,90 €</p>
+      </div>
+    </article>
+
+
+    <!-- MENÚ 3: JUEVES, VIERNES -->
+    <article class="menu-card">
+      <img class="menu-img" src="assets/images/pizza-4quesos.png" alt="Menú Jueves y Viernes" />
+
+      <div class="menu-info">
+        <div class="menu-head">
+          <h3>Menú 3</h3>
+          <div class="days">
+            <span class="day">Jue</span>
+            <span class="day">Vie</span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <h4>Jueves</h4>
+          <ul>
+            <li>Pizza 4 Quesos</li>
+            <li>Patatas al horno</li>
+            <li>Helado</li>
+          </ul>
+        </div>
+
+        <div class="day-block">
+          <h4>Viernes</h4>
+          <ul>
+            <li>Provolone</li>
+            <li>Pizza Mediterránea</li>
+            <li>Tiramisú</li>
+          </ul>
+        </div>
+
+        <p class="menu-price">12,50 €</p>
+      </div>
+    </article>
+
   </div>
 </section>

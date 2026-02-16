@@ -1,0 +1,97 @@
+.menu-page {
+  padding: 24px;
+}
+
+.subtitle {
+  margin: 6px 0 16px 0;
+  opacity: 0.8;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.menu-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  background: #fff;
+  align-items: flex-start;
+
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.menu-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex: 0 0 auto;
+}
+
+.menu-info {
+  width: 100%;
+}
+
+.menu-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.menu-head h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.days {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.day {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  opacity: 0.9;
+}
+
+.day-block {
+  margin: 10px 0;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+.day-block h4 {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+}
+
+.day-block ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.day-block li {
+  margin: 3px 0;
+}
+
+.menu-price {
+  margin-top: 10px;
+  font-weight: 700;
+}
