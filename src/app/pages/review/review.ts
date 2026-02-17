@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, ActivatedRoute } from "@angular/router";
 import { Review } from '../../shared/models/review.model';
 import { ReviewService } from '../../core/services/review';
+import { AuthService } from '../../core/services/auth';
 
 @Component({
   selector: 'app-review',
@@ -12,6 +13,8 @@ import { ReviewService } from '../../core/services/review';
   styleUrl: './review.css',
 })
 export class ReviewComponent implements OnInit {
+
+private auth = inject(AuthService);
 
   private reviewService = inject(ReviewService);
   private route = inject(ActivatedRoute);
@@ -64,5 +67,9 @@ export class ReviewComponent implements OnInit {
     } catch (error) {
       console.error('Error al crear reseña:', error);
     }
+  }
+
+  isAdmin(): boolean {
+    return this.auth.isAdmin();
   }
 }

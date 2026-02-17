@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,10 +9,10 @@ import { Menu } from '../interfaces/Menu';
 @Component({
   selector: 'app-menu-edit',
   standalone: true,
-  imports: [CommonModule, MenuFormComponent],
+  imports: [CommonModule,],
   templateUrl: './menu-edit.html',
 })
-export class MenuEditComponent implements OnInit {
+export class MenuEditComponent {
   id = 0;
   initialMenu: Menu | null = null;
   loading = false;
@@ -24,7 +24,7 @@ export class MenuEditComponent implements OnInit {
     private menuService: MenuService
   ) { }
 
-  ngOnInit(): void {
+  onInit() {
     const idParam = this.route.snapshot.paramMap.get('id');
     const parsed = Number(idParam);
 

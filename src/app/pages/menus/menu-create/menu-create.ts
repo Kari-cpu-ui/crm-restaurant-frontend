@@ -9,7 +9,7 @@ import { Menu } from "../interfaces/Menu";
 @Component({
   selector: 'app-menu-create',
   standalone: true,
-  imports: [CommonModule, MenuFormComponent],
+  imports: [CommonModule],
   templateUrl: './menu-create.html',
 })
 export class MenuCreateComponent {

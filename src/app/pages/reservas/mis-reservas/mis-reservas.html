@@ -1,7 +1,12 @@
 <header class="navbar">
   <div class="nav-left">
-    <a routerLink="/">Home</a>
-    <a routerLink="/reservas/nueva">Crear Reserva</a>
+    <a routerLink="/" routerLinkActive="active">Home</a>
+    <a routerLink="/menus" routerLinkActive="active">Carta</a>
+    <a routerLink="/mis-reservas" routerLinkActive="active">Reservas</a>
+    <a routerLink="/review" routerLinkActive="active">Reseñas</a>
+    <a routerLink="/sobre-nosotros" routerLinkActive="active">Sobre nosotros</a>
+    <a routerLink="/admin" routerLinkActive="active" *ngIf="isAdmin?.()">Admin</a>
+    <a routerLink="/reservas/nueva" routerLinkActive="active">Crear Reserva</a>
   </div>
 
   <div class="nav-right">
