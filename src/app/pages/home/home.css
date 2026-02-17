@@ -9,101 +9,123 @@ body,
 html {
     width: 100%;
     overflow-x: hidden;
-    /* evita scroll horizontal */
 }
 
 /* Navbar */
 .navbar {
     width: 100%;
-    /* 100% del contenedor, no 100vw */
-    padding: 15px 20px;
+    padding: 12px 30px;
     display: flex;
     justify-content: space-between;
-    /* izquierda y derecha */
     align-items: center;
     background-color: #fff;
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 10;
 }
 
 .nav-left,
 .nav-right {
     display: flex;
-    gap: 15px;
+    gap: 8px;
+    align-items: center;
 }
 
-.nav-left a,
-.nav-right a {
+.nav-left a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
     white-space: nowrap;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: all 0.25s ease;
+    font-size: 0.95rem;
 }
 
-.btn-register {
+.nav-left a:hover {
     background-color: #e63946;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
+    color: #fff;
+}
+
+/* Botones Login y Registro */
+.nav-right button {
+    background-color: #e63946;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
+    transition: all 0.25s ease;
 }
 
-.btn-register:hover {
-    background-color: #d62828;
+.nav-right button:hover {
+    background-color: #c5303c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.35);
 }
 
+.nav-right .btn-logout {
+    background-color: #444;
+}
 
+.nav-right .btn-logout:hover {
+    background-color: #222;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Hero */
 .hero {
-    width: 100%;
-    height: 100vh;
-    /* altura completa de la ventana */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    height: calc(100vh - 54px);
     background-image: url('/assets/images/pizza-home.jpg');
-    /* tu imagen de fondo */
     background-size: cover;
-    /* cubre todo el contenedor */
     background-position: center;
-    /* centra la imagen */
     background-repeat: no-repeat;
-    /* no repetir */
     position: relative;
-    /* para superponer overlay */
     display: flex;
     align-items: center;
-    /* centra verticalmente */
     justify-content: center;
-    /* centra horizontalmente */
     color: white;
-    /* texto en blanco */
     text-align: center;
-    /* centra el texto */
 }
 
 .hero .overlay {
     background-color: rgba(0, 0, 0, 0.5);
-    /* capa semi-transparente sobre la imagen */
-    padding: 50px;
-    border-radius: 10px;
+    padding: 50px 60px;
+    border-radius: 12px;
+    backdrop-filter: blur(2px);
 }
 
 .hero .logo {
     font-size: 4rem;
     margin-bottom: 20px;
+    letter-spacing: 4px;
 }
 
 .hero .subtitle {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 30px;
+    font-weight: 300;
 }
 
 .hero .btn-reserva {
     background-color: #e63946;
     color: white;
-    padding: 12px 30px;
+    padding: 14px 40px;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
     cursor: pointer;
+    transition: all 0.25s ease;
 }
 
 .hero .btn-reserva:hover {
-    background-color: #d62828;
+    background-color: #c5303c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
 }

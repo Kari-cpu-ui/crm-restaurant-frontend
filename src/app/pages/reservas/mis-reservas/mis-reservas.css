@@ -25,15 +25,40 @@
     margin: 5px 0;
 }
 
+.reserva-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .btn-reserva-small {
-    background-color: #e63946;
-    color: white;
-    border: none;
+    background-color: #fff;
+    color: #e63946;
+    border: 2px solid #e63946;
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: 600;
+    transition: all 0.25s ease;
 }
 
 .btn-reserva-small:hover {
-    background-color: #d62828;
+    background-color: #e63946;
+    color: #fff;
+}
+
+.btn-review {
+    background-color: #fff;
+    color: #e63946;
+    border: 2px solid #e63946;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.btn-review:hover {
+    background-color: #e63946;
+    color: #fff;
 }

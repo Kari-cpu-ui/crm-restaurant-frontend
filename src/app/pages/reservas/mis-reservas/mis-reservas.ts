@@ -58,6 +58,12 @@ export class MisReservasComponent {
     });
   }
 
+  // Ir a reseñas con el código de reserva
+  dejarResena(code?: string) {
+    if (!code) return;
+    this.router.navigate(['/review'], { queryParams: { code } });
+  }
+
 
   logout(): void {
     this.auth.logout();

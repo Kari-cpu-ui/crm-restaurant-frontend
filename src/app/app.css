@@ -24,5 +24,7 @@
 	text-decoration: none;
 }
 .nav-right .btn:hover { background:#1565c0 }
-.app-main { padding: 16px; }
+.app-main {
+  padding: 0;
+}
 

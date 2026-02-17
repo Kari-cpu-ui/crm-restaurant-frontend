@@ -1,10 +1,19 @@
+<header class="navbar">
+  <div class="nav-left">
+    <a routerLink="/">Home</a>
+    <a routerLink="/menus">Carta</a>
+  </div>
+</header>
+
 <section class="about-page">
+
+  <!-- Hero -->
   <header class="about-hero">
     <div class="hero-text">
       <h2>Sobre nosotros</h2>
 
       <p class="lead">
-        <b>Terra Rosa</b> es una pizzería tradicional fundada en 1930, nacida del horno de leña y de una idea simple:
+        <strong>Terra Rossa</strong> es una pizzería tradicional fundada en 1930, nacida del horno de leña y de una idea simple:
         masa lenta, ingredientes honestos y sabor que no pasa de moda.
       </p>
 
@@ -21,16 +30,17 @@
       </div>
 
       <div class="hero-cta">
-        <a class="btn" routerLink="/menus">Ver la carta</a>
-        <a class="btn ghost" routerLink="/">Volver a Home</a>
+        <a class="btn-about" routerLink="/menus">Ver la carta</a>
+        <a class="btn-about ghost" routerLink="/">Volver a Home</a>
       </div>
     </div>
 
-    <img class="hero-img" src="assets/images/pizza-home.jpg" alt="Pizza Terra Rosa" />
+    <img class="hero-img" src="assets/images/pizza-home.jpg" alt="Pizza Terra Rossa" />
   </header>
 
+  <!-- Info Grid -->
   <div class="about-grid">
-    <article class="card">
+    <article class="about-card">
       <h3>Tradición desde 1930</h3>
       <p>
         Nuestra historia empieza con un horno de leña, una receta familiar y el objetivo de hacer la pizza de siempre,
@@ -38,17 +48,17 @@
       </p>
     </article>
 
-    <article class="card">
+    <article class="about-card">
       <h3>Lo que nos define</h3>
       <ul class="list">
-        <li><b>Masa lenta:</b> fermentación para más sabor y mejor textura.</li>
-        <li><b>Ingredientes honestos:</b> calidad por delante de lo demás.</li>
-        <li><b>Producto de temporada:</b> apoyando lo local y lo fresco.</li>
-        <li><b>Espíritu familiar:</b> trato cercano, como en casa.</li>
+        <li><strong>Masa lenta:</strong> fermentación para más sabor y mejor textura.</li>
+        <li><strong>Ingredientes honestos:</strong> calidad por delante de lo demás.</li>
+        <li><strong>Producto de temporada:</strong> apoyando lo local y lo fresco.</li>
+        <li><strong>Espíritu familiar:</strong> trato cercano, como en casa.</li>
       </ul>
     </article>
 
-    <article class="card wide">
+    <article class="about-card wide">
       <h3>Especialidades de la casa</h3>
 
       <div class="specials">
@@ -86,17 +96,16 @@
       </div>
     </article>
 
-    <article class="card">
-      <h3>Horario</h3>
-      <p><b>L–J:</b> 13:00–16:00 · 20:00–23:00</p>
-      <p><b>V–D:</b> 13:00–16:30 · 20:00–23:30</p>
+    <article class="about-card">
+      <h3>🕒 Horario</h3>
+      <p><strong>L–J:</strong> 13:00–16:00 · 20:00–23:00</p>
+      <p><strong>V–D:</strong> 13:00–16:30 · 20:00–23:30</p>
     </article>
 
-    <article class="card">
-      <h3>Contacto</h3>
-      <p><b>Tel:</b> +34 600 000 000</p>
-      <p><b>Dirección:</b> Calle Ejemplo 123, Ciudad</p>
-      <p class="note">*(Cámbialo por lo real.)*</p>
+    <article class="about-card">
+      <h3>📍 Contacto</h3>
+      <p><strong>Tel:</strong> +34 912 47 83 56</p>
+      <p><strong>Dirección:</strong> Calle de Fuencarral, 45, 28004 Madrid</p>
     </article>
   </div>
 </section>

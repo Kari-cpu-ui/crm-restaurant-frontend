@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from "@angular/router";
+import { RouterLink, ActivatedRoute } from "@angular/router";
 import { Review } from '../../shared/models/review.model';
 import { ReviewService } from '../../core/services/review';
 
@@ -14,6 +14,7 @@ import { ReviewService } from '../../core/services/review';
 export class ReviewComponent implements OnInit {
 
   private reviewService = inject(ReviewService);
+  private route = inject(ActivatedRoute);
 
   newComment = signal('');
   newReservationCode = signal<string>('');
@@ -27,6 +28,12 @@ export class ReviewComponent implements OnInit {
   }
 
   async ngOnInit() {
+    // Leer código de reserva del query param si viene de "Mis Reservas"
+    const code = this.route.snapshot.queryParamMap.get('code');
+    if (code) {
+      this.newReservationCode.set(code);
+    }
+
     try {
       await this.loadReviews();
     } catch (error) {

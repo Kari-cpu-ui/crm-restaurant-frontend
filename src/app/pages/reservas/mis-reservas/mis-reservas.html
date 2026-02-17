@@ -23,7 +23,10 @@
         <p><strong>Fecha:</strong> {{ reserva.date }}</p>
         <p><strong>Personas:</strong> {{ reserva.guests }}</p>
       </div>
-      <button type="button" class="btn-reserva-small" (click)="cancelarReserva(reserva.id)">Cancelar</button>
+      <div class="reserva-actions">
+        <button type="button" class="btn-reserva-small" (click)="cancelarReserva(reserva.id)">Cancelar</button>
+        <button type="button" class="btn-review" (click)="dejarResena(reserva.reservation_code)">Dejar reseña</button>
+      </div>
     </div>
   } @empty {
     <p>No tienes reservas.</p>
