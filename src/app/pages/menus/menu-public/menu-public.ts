@@ -1,9 +1,12 @@
 import { Component, signal } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { MenuService } from '../../../core/services/menu';
 import { Menu } from '../../../shared/models/menu.model';
 
 @Component({
   selector: 'app-menu-public',
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './menu-public.html',
   styleUrls: ['./menu-public.css']
 })
