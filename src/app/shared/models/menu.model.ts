@@ -1,9 +1,18 @@
-// Modelo que representa un menú o plato del restaurante
-// Se usará en componentes de menú y en el servicio MenuService
+export interface Pizza {
+    id: number;
+    name: string;
+    category: string;
+    description?: string;
+    price: number;
+}
+
 export interface Menu {
-    id?: number; // ID del menú
-    nombre: string; // Nombre del plato
-    descripcion: string; // Descripción del plato
-    precio: number; // Precio del plato
-    disponible: boolean; // Si el plato está disponible
+    id: number;
+    name: string;
+    menu_date: Date;
+    description: string;
+    price: number;
+    category_id: string;
+    is_active: number;
+    image_url: string;
 }

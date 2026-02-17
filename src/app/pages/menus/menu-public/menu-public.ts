@@ -1,46 +1,37 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { MenuService } from '../menu';
-import { Menu } from '../interfaces/Menu';
+import { Component, signal } from '@angular/core';
+import { MenuService } from '../../../core/services/menu';
+import { Menu } from '../../../shared/models/menu.model';
 
 @Component({
   selector: 'app-menu-public',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './menu-public.html',
-  styleUrls: ['./menu-public.css'],
+  styleUrls: ['./menu-public.css']
 })
 export class MenuPublicComponent {
-  selectedDate = '';
-  menu: Menu | null = null;
-  error = '';
-  loading = false;
+  selectedDate: string = '';           // Fecha seleccionada
+  error: string = '';                  // Mensaje de error
+  menu = signal({} as Menu); // Menú obtenido
 
-  constructor(private menuService: MenuService) {}
+  constructor(private menuService: MenuService) { }
 
-  buscarMenu(): void {
+  onDateChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.selectedDate = input.value;
+
     this.error = '';
-    this.menu = null;
+    this.menu.set({} as Menu); // Reiniciamos el menú antes de cargar uno nuevo
 
-    if (!this.selectedDate) {
-      this.error = 'Selecciona una fecha';
-      return;
-    }
+    if (!this.selectedDate) return;
 
-    this.loading = true;
-    this.menuService.getMenuByDate(this.selectedDate).subscribe({
-      next: (data) => {
-        this.menu = data;
-        this.loading = false;
+    this.menuService.obtenerMenu(this.selectedDate).subscribe({
+      next: (res: Menu) => {
+        console.log(res);
+        this.menu.set(res);
       },
       error: () => {
-        this.error = 'No hay menú disponible para esa fecha';
-        this.loading = false;
+        this.error = 'No hay menú para esta fecha';
+        this.menu.set({} as Menu); // aseguramos que siga siendo un objeto
       }
     });
   }
 }
-
-

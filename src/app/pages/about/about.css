@@ -199,7 +199,15 @@
 }
 
 @media (max-width: 900px) {
-  .about-hero { grid-template-columns: 1fr; }
-  .about-grid { grid-template-columns: 1fr; }
-  .specials { grid-template-columns: 1fr; }
+  .about-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .specials {
+    grid-template-columns: 1fr;
+  }
 }

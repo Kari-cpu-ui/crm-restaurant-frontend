@@ -36,79 +36,80 @@
 
             <!-- Formulario crear/editar menú -->
             @if (showMenuForm) {
-                <div class="menu-form-overlay">
-                    <div class="menu-form-modal">
-                        <h3>{{ editingMenuId ? 'Editar Menú' : 'Crear Menú' }}</h3>
-                        @if (menuError) {
-                            <div class="form-error">{{ menuError }}</div>
-                        }
-                        <div class="form-group">
-                            <label>Fecha</label>
-                            <input type="date" [(ngModel)]="menuForm.date" />
-                        </div>
-                        <div class="form-group">
-                            <label>Primer Plato</label>
-                            <input type="text" [(ngModel)]="menuForm.first_course" placeholder="Ej: Ensalada César" />
-                        </div>
-                        <div class="form-group">
-                            <label>Segundo Plato</label>
-                            <input type="text" [(ngModel)]="menuForm.second_course" placeholder="Ej: Pizza Margherita" />
-                        </div>
-                        <div class="form-group">
-                            <label>Postre</label>
-                            <input type="text" [(ngModel)]="menuForm.dessert" placeholder="Ej: Tiramisú" />
-                        </div>
-                        <div class="form-group">
-                            <label>Precio (€)</label>
-                            <input type="number" [(ngModel)]="menuForm.price" min="0" step="0.50" />
-                        </div>
-                        <div class="form-actions">
-                            <button class="btn-save" (click)="saveMenu()">{{ editingMenuId ? 'Actualizar' : 'Crear' }}</button>
-                            <button class="btn-cancel" (click)="cancelMenuForm()">Cancelar</button>
-                        </div>
+            <div class="menu-form-overlay">
+                <div class="menu-form-modal">
+                    <h3>{{ editingMenuId ? 'Editar Menú' : 'Crear Menú' }}</h3>
+                    @if (menuError) {
+                    <div class="form-error">{{ menuError }}</div>
+                    }
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" [(ngModel)]="menuForm.date" />
+                    </div>
+                    <div class="form-group">
+                        <label>Primer Plato</label>
+                        <input type="text" [(ngModel)]="menuForm.first_course" placeholder="Ej: Ensalada César" />
+                    </div>
+                    <div class="form-group">
+                        <label>Segundo Plato</label>
+                        <input type="text" [(ngModel)]="menuForm.second_course" placeholder="Ej: Pizza Margherita" />
+                    </div>
+                    <div class="form-group">
+                        <label>Postre</label>
+                        <input type="text" [(ngModel)]="menuForm.dessert" placeholder="Ej: Tiramisú" />
+                    </div>
+                    <div class="form-group">
+                        <label>Precio (€)</label>
+                        <input type="number" [(ngModel)]="menuForm.price" min="0" step="0.50" />
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-save" (click)="saveMenu()">{{ editingMenuId ? 'Actualizar' : 'Crear'
+                            }}</button>
+                        <button class="btn-cancel" (click)="cancelMenuForm()">Cancelar</button>
                     </div>
                 </div>
+            </div>
             }
 
             <!-- Tabla de menús -->
             @if (menuLoading) {
-                <p class="section-desc">Cargando menús...</p>
+            <p class="section-desc">Cargando menús...</p>
             }
 
             @if (menus.length > 0) {
-                <div class="table-wrapper">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Primer Plato</th>
-                                <th>Segundo Plato</th>
-                                <th>Postre</th>
-                                <th>Precio</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (menu of menus; track menu.id) {
-                                <tr>
-                                    <td>{{ menu.date }}</td>
-                                    <td>{{ menu.first_course }}</td>
-                                    <td>{{ menu.second_course }}</td>
-                                    <td>{{ menu.dessert }}</td>
-                                    <td>{{ menu.price }} €</td>
-                                    <td class="td-actions">
-                                        <button class="btn-edit" (click)="openEditMenu(menu)">✏️</button>
-                                        <button class="btn-delete" (click)="deleteMenu(menu)">🗑️</button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Postre</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (menu of menus; track menu.id) {
+                        <tr>
+                            <td>{{ menu.date }}</td>
+                            <td>{{ menu.first_course }}</td>
+                            <td>{{ menu.second_course }}</td>
+                            <td>{{ menu.dessert }}</td>
+                            <td>{{ menu.price }} €</td>
+                            <td class="td-actions">
+                                <button class="btn-edit" (click)="openEditMenu(menu)">✏️</button>
+                                <button class="btn-delete" (click)="deleteMenu(menu)">🗑️</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
             }
 
             @if (!menuLoading && menus.length === 0) {
-                <p class="section-desc" style="margin-top: 24px;">No hay menús creados todavía.</p>
+            <p class="section-desc" style="margin-top: 24px;">No hay menús creados todavía.</p>
             }
         </div>
 

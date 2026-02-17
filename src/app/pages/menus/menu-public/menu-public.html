@@ -1,59 +1,31 @@
 <header class="navbar">
   <div class="nav-left">
     <a routerLink="/">Home</a>
-    <a routerLink="/menus" class="active">Carta</a>
-    <a routerLink="/review">Reseñas</a>
-    <a routerLink="/sobre-nosotros">Sobre nosotros</a>
+    <a routerLink="/menus">Carta</a>
   </div>
 </header>
 
-<section class="menu-page">
-  <div class="menu-hero">
-    <h1>🍕 Carta del Día</h1>
-    <p class="menu-subtitle">Selecciona una fecha para descubrir nuestro menú</p>
+<div class="menu-page">
+  <!-- Selector de fecha -->
+  <div class="date-selector">
+    <label for="menu-date">Selecciona una fecha:</label>
+    <input type="date" id="menu-date" [value]="selectedDate" (change)="onDateChange($event)" />
   </div>
 
-  <div class="menu-search-card">
-    <label for="menu-date">Fecha</label>
-    <input type="date" id="menu-date" [(ngModel)]="selectedDate" />
-    <button (click)="buscarMenu()">Buscar Menú</button>
+  <!-- Mensaje de error -->
+  <div class="error-message" [hidden]="!error">{{ error }}</div>
+
+  @if(menu().id) {
+  <div class="menu-details">
+    <p><strong>Name:</strong> {{ menu().name }}</p>
+    <p><strong>Descripción:</strong> {{ menu().description }}</p>
+    <p><strong>Precio:</strong> {{ menu().price }}</p>
+    <p>
+      <img [src]="menu().image_url" [alt]="menu().name" style="max-width:500px; border-radius:8px;" />
+
+    </p>
   </div>
-
-  @if (error) {
-    <div class="menu-error">{{ error }}</div>
+  }@else {
+  <p>Aquí aparecerá el menú del día cuando seleccionas una fecha.</p>
   }
-
-  @if (loading) {
-    <div class="menu-loading">Cargando...</div>
-  }
-
-  @if (menu) {
-    <div class="menu-result-card">
-      <div class="menu-date-badge">📅 {{ menu.date }}</div>
-      <div class="menu-courses">
-        <div class="course">
-          <span class="course-icon">🥗</span>
-          <div class="course-info">
-            <span class="course-label">Primer plato</span>
-            <span class="course-name">{{ menu.first_course }}</span>
-          </div>
-        </div>
-        <div class="course">
-          <span class="course-icon">🍝</span>
-          <div class="course-info">
-            <span class="course-label">Segundo plato</span>
-            <span class="course-name">{{ menu.second_course }}</span>
-          </div>
-        </div>
-        <div class="course">
-          <span class="course-icon">🍰</span>
-          <div class="course-info">
-            <span class="course-label">Postre</span>
-            <span class="course-name">{{ menu.dessert }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="menu-price">{{ menu.price }} €</div>
-    </div>
-  }
-</section>
+</div>
