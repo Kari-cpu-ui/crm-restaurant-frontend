@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Menu } from './interfaces/Menu';
+import { API_BASE_URL } from '../../app.config';
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
-  private apiUrl = 'http://localhost:3000/menus';
+  private apiUrl = `${API_BASE_URL}/menus`;
 
   constructor(private http: HttpClient) { }
 
@@ -14,7 +15,7 @@ export class MenuService {
   }
 
   getMenuByDate(date: string): Observable<Menu> {
-    return this.http.get<Menu>(`${this.apiUrl}/${date}`);
+    return this.http.get<Menu>(`${this.apiUrl}/date/${date}`);
   }
 
   getMenuById(id: number): Observable<Menu> {

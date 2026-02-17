@@ -1,25 +1,59 @@
 <header class="navbar">
   <div class="nav-left">
     <a routerLink="/">Home</a>
+    <a routerLink="/menus" class="active">Carta</a>
+    <a routerLink="/review">Reseñas</a>
+    <a routerLink="/sobre-nosotros">Sobre nosotros</a>
   </div>
 </header>
 
 <section class="menu-page">
-  <h2>Menú del Día</h2>
-
-  <div class="menu-form-card">
-    <label>Selecciona Fecha</label>
-    <input type="date" />
-    <button>Buscar Menú</button>
+  <div class="menu-hero">
+    <h1>🍕 Carta del Día</h1>
+    <p class="menu-subtitle">Selecciona una fecha para descubrir nuestro menú</p>
   </div>
 
-  <div class="menu-card">
-    <p><b>Fecha:</b> 2026-02-15</p>
-    <p><b>Platos:</b> Pizza, Ensalada</p>
+  <div class="menu-search-card">
+    <label for="menu-date">Fecha</label>
+    <input type="date" id="menu-date" [(ngModel)]="selectedDate" />
+    <button (click)="buscarMenu()">Buscar Menú</button>
   </div>
 
-  <div class="menu-card">
-    <p><b>Fecha:</b> 2026-02-16</p>
-    <p><b>Platos:</b> Pasta, Sopa</p>
-  </div>
+  @if (error) {
+    <div class="menu-error">{{ error }}</div>
+  }
+
+  @if (loading) {
+    <div class="menu-loading">Cargando...</div>
+  }
+
+  @if (menu) {
+    <div class="menu-result-card">
+      <div class="menu-date-badge">📅 {{ menu.date }}</div>
+      <div class="menu-courses">
+        <div class="course">
+          <span class="course-icon">🥗</span>
+          <div class="course-info">
+            <span class="course-label">Primer plato</span>
+            <span class="course-name">{{ menu.first_course }}</span>
+          </div>
+        </div>
+        <div class="course">
+          <span class="course-icon">🍝</span>
+          <div class="course-info">
+            <span class="course-label">Segundo plato</span>
+            <span class="course-name">{{ menu.second_course }}</span>
+          </div>
+        </div>
+        <div class="course">
+          <span class="course-icon">🍰</span>
+          <div class="course-info">
+            <span class="course-label">Postre</span>
+            <span class="course-name">{{ menu.dessert }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-price">{{ menu.price }} €</div>
+    </div>
+  }
 </section>

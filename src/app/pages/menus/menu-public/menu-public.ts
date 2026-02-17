@@ -1,59 +1,45 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-// Interfaz Menu
-export interface Menu {
-  id: number;
-  fecha: string;
-  platos: string[];
-}
+import { RouterModule } from '@angular/router';
+import { MenuService } from '../menu';
+import { Menu } from '../interfaces/Menu';
 
 @Component({
   selector: 'app-menu-public',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './menu-public.html',
+  styleUrls: ['./menu-public.css'],
 })
 export class MenuPublicComponent {
-  date = '';
+  selectedDate = '';
   menu: Menu | null = null;
-  menus: Menu[] = []; // aquí guardaremos los menús encontrados
   error = '';
   loading = false;
 
-  // Simulamos el servicio dentro del componente
-  private allMenus: Menu[] = [
-    { id: 1, fecha: '2026-02-15', platos: ['Pizza', 'Ensalada'] },
-    { id: 2, fecha: '2026-02-16', platos: ['Pasta', 'Sopa'] },
-    { id: 3, fecha: '2026-02-17', platos: ['Hamburguesa', 'Patatas'] }
-  ];
+  constructor(private menuService: MenuService) {}
 
-  constructor() { }
-
-  // Método para buscar menú por fecha
-  search(): void {
+  buscarMenu(): void {
     this.error = '';
     this.menu = null;
-    this.menus = [];
 
-    if (!this.date) {
-      this.error = 'Elige una fecha';
+    if (!this.selectedDate) {
+      this.error = 'Selecciona una fecha';
       return;
     }
 
     this.loading = true;
-
-    // Simulamos la llamada al servicio
-    const menuFiltrado = this.allMenus.filter(m => m.fecha === this.date);
-
-    if (menuFiltrado.length > 0) {
-      this.menus = menuFiltrado;
-    } else {
-      this.error = 'No hay menú para esa fecha';
-    }
-
-    this.loading = false;
+    this.menuService.getMenuByDate(this.selectedDate).subscribe({
+      next: (data) => {
+        this.menu = data;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = 'No hay menú disponible para esa fecha';
+        this.loading = false;
+      }
+    });
   }
 }
 

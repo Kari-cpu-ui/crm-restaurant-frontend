@@ -1,16 +1,3 @@
-// Servicio que maneja la autenticación de usuarios
-// Aquí implementaremos login, logout y verificación de sesión
-import { Injectable } from '@angular/core';
-import { Menu } from '../../shared/models/menu.model'; // Modelo de menú
+// MenuService está definido en src/app/pages/menus/menu.ts
+// Este archivo se mantiene vacío para evitar conflictos.
 
-@Injectable({
-  providedIn: 'root',
-})
-export class MenuService {
-  menus: Menu[] = []; // Arreglo de menús
-  
-  constructor() { }
-
-  //TODO: implementar obtener menús
-  //TODO: implementar crear/editar/eliminar menú (admin)
-}
