@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -18,7 +18,7 @@ export class MenuPublicComponent {
   error = '';
   loading = false;
 
-  constructor(private menuService: MenuService) {}
+  constructor(private menuService: MenuService, private cdr: ChangeDetectorRef) {}
 
   buscarMenu(): void {
     this.error = '';
@@ -34,10 +34,12 @@ export class MenuPublicComponent {
       next: (data) => {
         this.menu = data;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.error = 'No hay menú disponible para esa fecha';
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }
