@@ -17,10 +17,10 @@
 
   <div class="reserva-form-container">
     <label>
-      Mesa:
-      <input type="number" id="table_id" placeholder="ID de la mesa"
-        [value]="nuevaReserva().table_id"
-        (input)="actualizarCampo('table_id', $event)">
+      Hora:
+      <input type="time" id="time"
+        [value]="nuevaReserva().time"
+        (input)="actualizarCampo('time', $event)">
     </label>
 
     <label>

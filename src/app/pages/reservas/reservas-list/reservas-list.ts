@@ -20,17 +20,17 @@ export class ReservasListComponent {
   ngOnInit() {
     // Datos de prueba
     this.arrReservas.set([
-      { id: 1, table_id: 2, date: '2026-02-08', guests: 4, customer_name: '1' },
-      { id: 2, table_id: 1, date: '2026-02-09', guests: 2, customer_name: '1' },
-      { id: 3, table_id: 3, date: '2026-02-10', guests: 5, customer_name: '1' },
+      { id: 1, reservation_code: '4821', time: '14:00', date: '2026-02-08', guests: 4, customer_name: '1' },
+      { id: 2, reservation_code: '7356', time: '20:00', date: '2026-02-09', guests: 2, customer_name: '1' },
+      { id: 3, reservation_code: '9104', time: '21:30', date: '2026-02-10', guests: 5, customer_name: '1' },
     ]);
   }
 
-  // Método para filtrar por mesa
+  // Método para filtrar por hora
   filtrar($event: Event) {
-    const mesa = ($event.target as HTMLSelectElement).value;
-    if (mesa === 'Todas') return this.ngOnInit();
-    const filtradas = this.arrReservas().filter(r => r.table_id === Number(mesa));
+    const hora = ($event.target as HTMLSelectElement).value;
+    if (hora === 'Todas') return this.ngOnInit();
+    const filtradas = this.arrReservas().filter(r => r.time === hora);
     this.arrReservas.set(filtradas);
   }
 

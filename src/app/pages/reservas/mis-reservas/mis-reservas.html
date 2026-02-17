@@ -18,7 +18,8 @@
   @for (reserva of arrReservas(); track reserva.id) {
     <div class="reserva-card">
       <div class="reserva-info">
-        <p><strong>Mesa:</strong> {{ reserva.table_id }}</p>
+        <p><strong>Código de Reserva:</strong> {{ reserva.reservation_code }}</p>
+        <p><strong>Hora:</strong> {{ reserva.time }}</p>
         <p><strong>Fecha:</strong> {{ reserva.date }}</p>
         <p><strong>Personas:</strong> {{ reserva.guests }}</p>
       </div>

@@ -18,7 +18,7 @@ export class ReservaCreateComponent {
   reservasService = inject(ReservaService);
 
   nuevaReserva = signal<Reserva>({
-    table_id: 1,
+    time: '',
     customer_name: '',
     date: '',
     guests: 1,
@@ -38,23 +38,13 @@ export class ReservaCreateComponent {
   crearReserva() {
     const reserva = this.nuevaReserva();
 
-    // Comprobar disponibilidad antes de crear
-    this.reservasService.obtenerReservas(reserva.customer_name).subscribe({
-      next: (reservasExistentes) => {
-        if (this.reservasService.estaDisponible(reserva.table_id, reserva.date, reservasExistentes)) {
-          this.reservasService.crearReserva(reserva).subscribe({
-            next: (res) => {
-              console.log('Reserva creada:', res);
-              alert('Reserva creada con éxito');
-              this.router.navigate(['/mis-reservas']);
-            },
-            error: (err) => console.error('Error al crear reserva:', err)
-          });
-        } else {
-          alert('La mesa no está disponible en esa fecha');
-        }
+    this.reservasService.crearReserva(reserva).subscribe({
+      next: (res) => {
+        console.log('Reserva creada:', res);
+        alert('Reserva creada con éxito');
+        this.router.navigate(['/mis-reservas']);
       },
-      error: (err) => console.error('Error al verificar disponibilidad:', err)
+      error: (err) => console.error('Error al crear reserva:', err)
     });
   }
 
@@ -62,7 +52,7 @@ export class ReservaCreateComponent {
     const valor = (event.target as HTMLInputElement).value;
     const reservaActual = this.nuevaReserva();
 
-    if (campo === 'table_id' || campo === 'guests') {
+    if (campo === 'guests') {
       this.nuevaReserva.set({ ...reservaActual, [campo]: Number(valor) });
     } else {
       this.nuevaReserva.set({ ...reservaActual, [campo]: valor });

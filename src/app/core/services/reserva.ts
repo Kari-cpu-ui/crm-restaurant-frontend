@@ -27,8 +27,5 @@ export class ReservaService {
     return this.http.delete(`${this.apiUrl}/${reservaId}`);
   }
 
-  // Verificar disponibilidad (simple)
-  estaDisponible(tableId: number, date: string, reservasExistentes: Reserva[]): boolean {
-    return !reservasExistentes.some(r => r.table_id === tableId && r.date === date);
-  }
+
 }

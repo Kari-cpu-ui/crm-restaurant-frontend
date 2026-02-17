@@ -30,15 +30,15 @@ export class MisReservasComponent {
   }
 
 
-  // Filtrar por mesa
+  // Filtrar por hora
   filtrar($event: Event) {
     const htmlElement = $event.target as HTMLSelectElement;
-    const mesa = htmlElement.value;
+    const hora = htmlElement.value;
 
-    if (mesa === 'Todas') {
+    if (hora === 'Todas') {
       this.ngOnInit(); // recargar todas las reservas
     } else {
-      const filtradas = this.arrReservas().filter(r => r.table_id === Number(mesa));
+      const filtradas = this.arrReservas().filter(r => r.time === hora);
       this.arrReservas.set(filtradas);
     }
   }
@@ -47,8 +47,14 @@ export class MisReservasComponent {
   cancelarReserva(reservaId?: number) {
     if (!reservaId) return;
     this.reservasService.cancelarReserva(reservaId).subscribe({
-      next: () => this.ngOnInit(), // recargar la lista
-      error: (err) => console.error('Error al cancelar reserva:', err)
+      next: () => {
+        this.arrReservas.set(this.arrReservas().filter(r => r.id !== reservaId));
+        alert('Tu reserva ha sido cancelada correctamente.');
+      },
+      error: (err) => {
+        console.error('Error al cancelar reserva:', err);
+        alert('Error al cancelar la reserva. Inténtalo de nuevo.');
+      }
     });
   }
 

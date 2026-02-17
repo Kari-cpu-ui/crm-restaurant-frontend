@@ -9,8 +9,8 @@
   <p>Aquí puedes dejar o ver reseñas.</p>
   <form class="review-form">
     <div>
-      <label>Reserva ID
-        <input type="number" name="reservationId" [value]="newReservationId()" (input)="newReservationId.set(+$any($event.target).value)" required />
+      <label>Código de Reserva (4 dígitos)
+        <input type="text" name="reservationCode" maxlength="4" pattern="[0-9]{4}" placeholder="Ej: 1234" [value]="newReservationCode()" (input)="newReservationCode.set($any($event.target).value)" required />
       </label>
     </div>
     <div>
@@ -28,16 +28,16 @@
       </label>
     </div>
     <div>
-      <button type="button" (click)="addReview()" [disabled]="!newReservationId() || !newComment() || newRating() < 1">Guardar reseña</button>
+      <button type="button" (click)="addReview()" [disabled]="!newReservationCode() || newReservationCode().length !== 4 || !newComment() || newRating() < 1">Guardar reseña</button>
     </div>
   </form>
 </div>
 <section class="reviews-section">
   <div class="cards-grid">
-    @for (r of reviews(); track r.reservation_id) {
+    @for (r of reviews(); track r.reservation_code) {
       <article class="card">
         <header class="card-header">
-          <div class="booking-id">Reserva: <span>{{ r.reservation_id }}</span></div>
+          <div class="booking-id">Código: <span>{{ r.reservation_code }}</span></div>
           <div class="rating">
             @for (star of [1, 2, 3, 4, 5]; track star) {
               <span class="star" [class.filled]="star <= r.rating">★</span>

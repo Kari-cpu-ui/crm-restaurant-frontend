@@ -16,7 +16,7 @@ export class ReviewComponent implements OnInit {
   private reviewService = inject(ReviewService);
 
   newComment = signal('');
-  newReservationId = signal<number | null>(null);
+  newReservationCode = signal<string>('');
   newRating = signal<number>(0);
 
   readonly reviews = signal<Review[]>([]);
@@ -40,18 +40,18 @@ export class ReviewComponent implements OnInit {
 
   async addReview() {
     const comment = this.newComment()?.trim();
-    const reservationId = this.newReservationId();
+    const reservationCode = this.newReservationCode();
     const rating = this.newRating();
-    if (!comment || !reservationId || rating < 1 || rating > 5) return;
+    if (!comment || !reservationCode || reservationCode.length !== 4 || rating < 1 || rating > 5) return;
 
     try {
       await this.reviewService.crearReview({
-        reservation_id: reservationId,
+        reservation_code: reservationCode,
         rating,
         comment,
       });
       this.newComment.set('');
-      this.newReservationId.set(null);
+      this.newReservationCode.set('');
       this.newRating.set(0);
       await this.loadReviews();
     } catch (error) {
