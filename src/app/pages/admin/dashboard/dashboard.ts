@@ -113,6 +113,7 @@ export class AdminDashboardComponent implements OnInit {
       // Create
       this.menuService.createMenu(this.menuForm).subscribe({
         next: () => {
+            alert('¡Menú creado correctamente!');
           this.showMenuForm = false;
           this.loadMenus();
         },
