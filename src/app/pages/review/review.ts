@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, ActivatedRoute, Router } from "@angular/router";
@@ -12,9 +12,9 @@ import { AuthService } from '../../core/services/auth';
   templateUrl: './review.html',
   styleUrl: './review.css',
 })
-export class ReviewComponent implements OnInit {
+export class ReviewComponent {
 
-private auth = inject(AuthService);
+  private auth = inject(AuthService);
   private router = inject(Router);
 
   private reviewService = inject(ReviewService);
@@ -26,20 +26,20 @@ private auth = inject(AuthService);
 
   readonly reviews = signal<Review[]>([]);
 
-  async loadReviews() {
-    const data = await this.reviewService.obtenerReviews();
-    this.reviews.set(data);
-  }
-
-  async ngOnInit() {
+  constructor() {
     // Leer código de reserva del query param si viene de "Mis Reservas"
     const code = this.route.snapshot.queryParamMap.get('code');
     if (code) {
       this.newReservationCode.set(code);
     }
 
+    this.loadReviews();
+  }
+
+  async loadReviews() {
     try {
-      await this.loadReviews();
+      const data = await this.reviewService.obtenerReviews();
+      this.reviews.set(data);
     } catch (error) {
       console.error('Error al cargar reseñas:', error);
     }
