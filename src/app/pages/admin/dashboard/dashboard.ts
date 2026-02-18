@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink, Router } from "@angular/router";
 import { CommonModule } from '@angular/common';
@@ -28,7 +28,7 @@ export class AdminDashboardComponent {
   menuLoading = false;
   menuError = '';
 
-  constructor(private http: HttpClient, private menuService: MenuService, private auth: AuthService, private router: Router) {
+  constructor(private http: HttpClient, private menuService: MenuService, private auth: AuthService, private router: Router, private cdr: ChangeDetectorRef) {
     this.loadMenus();
   }
 
@@ -131,8 +131,13 @@ export class AdminDashboardComponent {
     this.menuService.deleteMenu(menu.id!).subscribe({
       next: () => {
         this.menus = this.menus.filter(m => m.id !== menu.id);
+        this.cdr.detectChanges();
+        alert('Menú eliminado correctamente.');
       },
-      error: (err) => console.error('Error eliminando menú', err)
+      error: (err) => {
+        console.error('Error eliminando menú', err);
+        alert('Error al eliminar el menú.');
+      }
     });
   }
 
