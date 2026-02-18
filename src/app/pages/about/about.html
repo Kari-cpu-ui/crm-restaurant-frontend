@@ -5,7 +5,12 @@
     <a routerLink="/mis-reservas" routerLinkActive="active">Reservas</a>
     <a routerLink="/review" routerLinkActive="active">Reseñas</a>
     <a routerLink="/sobre-nosotros" routerLinkActive="active">Sobre nosotros</a>
-    <a routerLink="/admin" routerLinkActive="active" [hidden]="!isAdmin()">Admin</a>
+    @if (isAdmin()) {
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    }
+  </div>
+  <div class="nav-right">
+    <button class="btn-logout" [hidden]="!isLogged()" (click)="logout()">Logout</button>
   </div>
 </header>
 

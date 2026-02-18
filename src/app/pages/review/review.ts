@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, ActivatedRoute } from "@angular/router";
+import { RouterLink, ActivatedRoute, Router } from "@angular/router";
 import { Review } from '../../shared/models/review.model';
 import { ReviewService } from '../../core/services/review';
 import { AuthService } from '../../core/services/auth';
@@ -15,6 +15,7 @@ import { AuthService } from '../../core/services/auth';
 export class ReviewComponent implements OnInit {
 
 private auth = inject(AuthService);
+  private router = inject(Router);
 
   private reviewService = inject(ReviewService);
   private route = inject(ActivatedRoute);
@@ -71,5 +72,14 @@ private auth = inject(AuthService);
 
   isAdmin(): boolean {
     return this.auth.isAdmin();
+  }
+
+  isLogged(): boolean {
+    return this.auth.isLogged();
+  }
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/']);
   }
 }

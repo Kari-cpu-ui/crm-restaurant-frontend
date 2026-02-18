@@ -73,4 +73,17 @@ export class MisReservasComponent {
   isLogged(): boolean {
     return this.auth.isLogged();
   }
+
+  isAdmin(): boolean {
+    return this.auth.isAdmin();
+  }
+
+  hacerReserva(): void {
+    if (this.auth.isLogged()) {
+      this.router.navigate(['/reservas/nueva']);
+    } else {
+      alert('Debes iniciar sesión para hacer una reserva.');
+      this.router.navigate(['/login']);
+    }
+  }
 }

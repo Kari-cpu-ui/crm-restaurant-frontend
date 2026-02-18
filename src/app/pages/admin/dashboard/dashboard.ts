@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RouterLink } from "@angular/router";
+import { RouterLink, Router } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../../menus/menu';
 import { Menu } from '../../menus/interfaces/Menu';
+import { AuthService } from '../../../core/services/auth';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,7 +14,7 @@ import { Menu } from '../../menus/interfaces/Menu';
   standalone: true,
   imports: [RouterLink, CommonModule, FormsModule]
 })
-export class AdminDashboardComponent implements OnInit {
+export class AdminDashboardComponent {
 
   section: string = 'menu-create';
 
@@ -21,15 +22,13 @@ export class AdminDashboardComponent implements OnInit {
 
   // --- Menu management ---
   menus: Menu[] = [];
-  menuForm: Menu = { date: '', first_course: '', second_course: '', dessert: '', price: 0 };
+  menuForm: Menu = { name: '', description: '', price: 0, image_url: '', menu_date: '' };
   editingMenuId: number | null = null;
   showMenuForm = false;
   menuLoading = false;
   menuError = '';
 
-  constructor(private http: HttpClient, private menuService: MenuService) { }
-
-  ngOnInit(): void {
+  constructor(private http: HttpClient, private menuService: MenuService, private auth: AuthService, private router: Router) {
     this.loadMenus();
   }
 
@@ -55,7 +54,7 @@ export class AdminDashboardComponent implements OnInit {
     this.menuLoading = true;
     this.menuService.getMenus().subscribe({
       next: (data) => {
-        this.menus = data.sort((a, b) => a.date.localeCompare(b.date));
+        this.menus = data.sort((a, b) => (b.menu_date || '').localeCompare(a.menu_date || ''));
         this.menuLoading = false;
       },
       error: (err) => {
@@ -68,7 +67,7 @@ export class AdminDashboardComponent implements OnInit {
 
   openCreateMenu(): void {
     this.editingMenuId = null;
-    this.menuForm = { date: '', first_course: '', second_course: '', dessert: '', price: 0 };
+    this.menuForm = { name: '', description: '', price: 0, image_url: '', menu_date: '' };
     this.showMenuForm = true;
     this.menuError = '';
   }
@@ -87,7 +86,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   saveMenu(): void {
-    if (!this.menuForm.date || !this.menuForm.first_course || !this.menuForm.second_course || !this.menuForm.dessert || !this.menuForm.price) {
+    if (!this.menuForm.name || !this.menuForm.description || !this.menuForm.price) {
       this.menuError = 'Todos los campos son obligatorios';
       return;
     }
@@ -127,7 +126,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   deleteMenu(menu: Menu): void {
-    if (!confirm(`¿Eliminar menú del ${menu.date}?`)) return;
+    if (!confirm(`¿Eliminar menú "${menu.name}"?`)) return;
 
     this.menuService.deleteMenu(menu.id!).subscribe({
       next: () => {
@@ -135,6 +134,12 @@ export class AdminDashboardComponent implements OnInit {
       },
       error: (err) => console.error('Error eliminando menú', err)
     });
+  }
+
+  formatDate(date?: string): string {
+    if (!date) return '—';
+    const [y, m, d] = date.split('-');
+    return `${d}/${m}/${y}`;
   }
 
   // ========== USERS ==========
@@ -184,5 +189,10 @@ export class AdminDashboardComponent implements OnInit {
       },
       error: (err) => console.error('Error cargando reservas', err)
     });
+  }
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/']);
   }
 }

@@ -5,6 +5,12 @@
     <a routerLink="/mis-reservas" routerLinkActive="active">Reservas</a>
     <a routerLink="/review" routerLinkActive="active">Reseñas</a>
     <a routerLink="/sobre-nosotros" routerLinkActive="active">Sobre nosotros</a>
+    @if (isAdmin()) {
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    }
+  </div>
+  <div class="nav-right">
+    <button class="btn-logout" [hidden]="!isLogged()" (click)="logout()">Logout</button>
   </div>
 </header>
 
@@ -20,15 +26,17 @@
 
   @if(menu().id) {
   <div class="menu-details">
-    <p><strong>Name:</strong> {{ menu().name }}</p>
+    <p><strong>Nombre:</strong> {{ menu().name }}</p>
     <p><strong>Descripción:</strong> {{ menu().description }}</p>
-    <p><strong>Precio:</strong> {{ menu().price }}</p>
+    <p><strong>Precio:</strong> {{ menu().price }} €</p>
     <p>
       <img [src]="menu().image_url" [alt]="menu().name" style="max-width:500px; border-radius:8px;" />
 
     </p>
+    <button class="btn-reserva" (click)="hacerReserva()">RESERVA</button>
   </div>
   }@else {
   <p>Aquí aparecerá el menú del día cuando seleccionas una fecha.</p>
+  <button class="btn-reserva" (click)="hacerReserva()">RESERVA</button>
   }
 </div>

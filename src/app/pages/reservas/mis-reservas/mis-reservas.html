@@ -5,35 +5,35 @@
     <a routerLink="/mis-reservas" routerLinkActive="active">Reservas</a>
     <a routerLink="/review" routerLinkActive="active">Reseñas</a>
     <a routerLink="/sobre-nosotros" routerLinkActive="active">Sobre nosotros</a>
-    <a routerLink="/admin" routerLinkActive="active" *ngIf="isAdmin?.()">Admin</a>
-    <a routerLink="/reservas/nueva" routerLinkActive="active">Crear Reserva</a>
+    @if (isAdmin()) {
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    }
   </div>
-
   <div class="nav-right">
-    <button class="btn-logout" [hidden]="!isLogged()" (click)="logout()">
-      Logout
-    </button>
-
+    <button class="btn-logout" [hidden]="!isLogged()" (click)="logout()">Logout</button>
   </div>
 </header>
 
-<section class="mis-reservas-page">
-  <h2>Mis Reservas</h2>
+<section class="mis-reservas-bg">
+  <div class="mis-reservas-page">
+    <h2>Mis Reservas</h2>
 
-  @for (reserva of arrReservas(); track reserva.id) {
-    <div class="reserva-card">
-      <div class="reserva-info">
-        <p><strong>Código de Reserva:</strong> {{ reserva.reservation_code }}</p>
-        <p><strong>Hora:</strong> {{ reserva.time }}</p>
-        <p><strong>Fecha:</strong> {{ reserva.date }}</p>
-        <p><strong>Personas:</strong> {{ reserva.guests }}</p>
+    @for (reserva of arrReservas(); track reserva.id) {
+      <div class="reserva-card">
+        <div class="reserva-info">
+          <p><strong>Código de Reserva:</strong> {{ reserva.reservation_code }}</p>
+          <p><strong>Hora:</strong> {{ reserva.time }}</p>
+          <p><strong>Fecha:</strong> {{ reserva.date }}</p>
+          <p><strong>Personas:</strong> {{ reserva.guests }}</p>
+        </div>
+        <div class="reserva-actions">
+          <button type="button" class="btn-reserva-small" (click)="cancelarReserva(reserva.id)">Cancelar</button>
+          <button type="button" class="btn-review" (click)="dejarResena(reserva.reservation_code)">Dejar reseña</button>
+        </div>
       </div>
-      <div class="reserva-actions">
-        <button type="button" class="btn-reserva-small" (click)="cancelarReserva(reserva.id)">Cancelar</button>
-        <button type="button" class="btn-review" (click)="dejarResena(reserva.reservation_code)">Dejar reseña</button>
-      </div>
-    </div>
-  } @empty {
-    <p>No tienes reservas.</p>
-  }
+    } @empty {
+      <p>No tienes reservas.</p>
+      <button class="btn-reserva" (click)="hacerReserva()">RESERVA</button>
+    }
+  </div>
 </section>

@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MenuService } from '../../../core/services/menu';
+import { AuthService } from '../../../core/services/auth';
 import { Menu } from '../../../shared/models/menu.model';
 
 @Component({
@@ -15,7 +16,20 @@ export class MenuPublicComponent {
   error: string = '';                  // Mensaje de error
   menu = signal({} as Menu); // Menú obtenido
 
-  constructor(private menuService: MenuService) { }
+  constructor(private menuService: MenuService, private auth: AuthService, private router: Router) { }
+
+  isLogged(): boolean { return this.auth.isLogged(); }
+  isAdmin(): boolean { return this.auth.isAdmin(); }
+  logout(): void { this.auth.logout(); this.router.navigate(['/']); }
+
+  hacerReserva(): void {
+    if (this.auth.isLogged()) {
+      this.router.navigate(['/reservas/nueva']);
+    } else {
+      alert('Debes iniciar sesión para hacer una reserva.');
+      this.router.navigate(['/login']);
+    }
+  }
 
   onDateChange(event: Event) {
     const input = event.target as HTMLInputElement;

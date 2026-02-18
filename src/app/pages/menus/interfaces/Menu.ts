@@ -1,8 +1,10 @@
 export interface Menu {
   id?: number;
-  date: string;          // "YYYY-MM-DD"
-  first_course: string;
-  second_course: string;
-  dessert: string;
+  name: string;
+  description: string;
   price: number;
+  category_id?: number;
+  is_active?: number;
+  image_url?: string;
+  menu_date?: string;
 }

@@ -6,9 +6,6 @@ import { API_BASE_URL } from '../../app.config';
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
-  obtenerMenu(selectedDate: string) {
-    throw new Error('Method not implemented.');
-  }
   private apiUrl = `${API_BASE_URL}/menus`;
 
   constructor(private http: HttpClient) { }

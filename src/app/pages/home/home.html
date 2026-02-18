@@ -5,10 +5,9 @@
         <a routerLink="/mis-reservas" routerLinkActive="active">Reservas</a>
         <a routerLink="/review" routerLinkActive="active">Reseñas</a>
         <a routerLink="/sobre-nosotros" routerLinkActive="active">Sobre nosotros</a>
-        <a routerLink="/admin" routerLinkActive="active" [hidden]="!isAdmin()">Admin</a>
-        <!-- <button class="btn-admin" [hidden]="!isAdmin()" routerLink="/admin">
-            Admin
-        </button> -->
+        @if (isAdmin()) {
+          <a routerLink="/admin" routerLinkActive="active">Admin</a>
+        }
     </div>
 
     <div class="nav-right">
