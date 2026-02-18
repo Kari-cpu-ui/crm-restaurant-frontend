@@ -38,13 +38,27 @@ export class ReservaCreateComponent {
   crearReserva() {
     const reserva = this.nuevaReserva();
 
+    const hoy = new Date();
+    const fechaSeleccionada = new Date(reserva.date);
+
+    if (fechaSeleccionada < new Date(hoy.setHours(0, 0, 0, 0))) {
+      alert('No puedes seleccionar una fecha pasada.');
+      return;
+    }
+
     this.reservasService.crearReserva(reserva).subscribe({
       next: (res) => {
-        console.log('Reserva creada:', res);
         alert('Reserva creada con éxito');
         this.router.navigate(['/mis-reservas']);
       },
-      error: (err) => console.error('Error al crear reserva:', err)
+      error: (err) => {
+        // Mostrar mensaje del backend en alerta amigable
+        if (err.error && err.error.detail) {
+          alert(err.error.detail);  // Esa hora no está disponible, intenta otra.
+        } else {
+          alert('Error al crear la reserva. Intenta nuevamente.');
+        }
+      }
     });
   }
 

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, switchMap } from 'rxjs/operators';
+import { RegisterResponse } from '../../shared/models/user.model';
 
 interface LoginResponse {
   access_token: string;
@@ -19,38 +20,39 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-
-  // Registro
-  register(name: string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, { name, email, password })
+  /** Registro y login automático */
+  register(name: string, email: string, password: string): Observable<LoginResponse> {
+    return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, { name, email, password })
       .pipe(
-        catchError(this.handleError) // Maneja errores del backend
+        // Si registro OK, hacemos login automáticamente
+        switchMap(() => this.login(email, password)),
+        catchError(this.handleError)
       );
   }
 
-
-  // Login
+  /** Login */
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { email, password })
       .pipe(
         tap(res => {
-          // Guardamos token solo si login fue exitoso
+          // Guardar datos en localStorage
           localStorage.setItem('token', res.access_token);
           localStorage.setItem('logged', 'true');
           localStorage.setItem('is_admin', String(res.is_admin));
 
-          // Extraer y guardar user ID del token
+          // Guardar user_id extraído del token JWT
           try {
             const payload = JSON.parse(atob(res.access_token.split('.')[1]));
-            localStorage.setItem('user_id', String(payload.user_id));
-          } catch { }
+            if (payload.user_id) localStorage.setItem('user_id', String(payload.user_id));
+          } catch (err) {
+            console.warn('No se pudo extraer user_id del token', err);
+          }
         }),
         catchError(this.handleError)
       );
   }
 
-
-  // Logout
+  /** Logout */
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('logged');
@@ -59,29 +61,26 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-
-  // Verificaciones
+  /** Verificaciones */
   isLogged(): boolean {
     return localStorage.getItem('logged') === 'true';
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('token');
   }
 
   isAdmin(): boolean {
     return localStorage.getItem('is_admin') === 'true';
   }
 
-  // Obtener el ID del usuario desde localStorage o token JWT
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   getUserId(): string | null {
-    // Primero intentar desde localStorage
     const storedId = localStorage.getItem('user_id');
     if (storedId) return storedId;
 
-    // Fallback: decodificar del token
     const token = this.getToken();
     if (!token) return null;
+
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       return payload.user_id ? String(payload.user_id) : null;
@@ -90,8 +89,8 @@ export class AuthService {
     }
   }
 
-
-  private handleError(error: any) {
+  /** Manejo de errores */
+  private handleError(error: HttpErrorResponse) {
     console.error('Error en AuthService:', error);
     const message = error.error?.detail || 'Error desconocido';
     return throwError(() => new Error(message));

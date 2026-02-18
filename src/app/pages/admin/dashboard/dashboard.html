@@ -38,45 +38,42 @@
             <button class="btn-create-menu" (click)="openCreateMenu()">+ Nuevo Menú</button>
 
             <!-- Formulario crear/editar menú -->
-            @if (showMenuForm) {
-            <div class="menu-form-overlay">
+            <div class="menu-form-overlay" [class.show]="showMenuForm">
                 <div class="menu-form-modal">
                     <h3>{{ editingMenuId ? 'Editar Menú' : 'Crear Menú' }}</h3>
-                    @if (menuError) {
                     <div class="form-error">{{ menuError }}</div>
-                    }
+
                     <div class="form-group">
                         <label>Fecha</label>
-                        <input type="date" [(ngModel)]="menuForm.menu_date" />
+                        <input type="date" id="menuDate" #menuDate />
                     </div>
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input type="text" [(ngModel)]="menuForm.name" placeholder="Ej: Margarita" />
+                        <input type="text" id="menuName" #menuName placeholder="Ej: Margarita" />
                     </div>
                     <div class="form-group">
                         <label>Descripción</label>
-                        <input type="text" [(ngModel)]="menuForm.description" placeholder="Ej: Tomate, mozzarella y albahaca" />
+                        <input type="text" id="menuDesc" #menuDesc placeholder="Ej: Tomate, mozzarella y albahaca" />
                     </div>
                     <div class="form-group">
                         <label>Precio (€)</label>
-                        <input type="number" [(ngModel)]="menuForm.price" min="0" step="0.50" />
+                        <input type="number" id="menuPrice" #menuPrice min="0" step="0.50" />
                     </div>
                     <div class="form-group">
                         <label>URL de imagen</label>
-                        <input type="text" [(ngModel)]="menuForm.image_url" placeholder="Ej: assets/images/pizza.jpg" />
+                        <input type="text" id="menuImage" #menuImage placeholder="Ej: assets/images/pizza.jpg" />
                     </div>
                     <div class="form-actions">
-                        <button class="btn-save" (click)="saveMenu()">{{ editingMenuId ? 'Actualizar' : 'Crear'
-                            }}</button>
+                        <button class="btn-save"
+                            (click)="saveMenu(menuDate.value, menuName.value, menuDesc.value, menuPrice.value, menuImage.value)">
+                            {{ editingMenuId ? 'Actualizar' : 'Crear' }}
+                        </button>
                         <button class="btn-cancel" (click)="cancelMenuForm()">Cancelar</button>
                     </div>
                 </div>
             </div>
-            }
 
             <!-- Tabla de menús -->
-
-            @if (menus.length > 0) {
             <div class="table-wrapper">
                 <table class="admin-table">
                     <thead>
@@ -89,26 +86,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (menu of menus; track menu.id) {
-                        <tr>
-                            <td>{{ formatDate(menu.menu_date) }}</td>
-                            <td>{{ menu.name }}</td>
-                            <td>{{ menu.description }}</td>
-                            <td>{{ menu.price }} €</td>
-                            <td class="td-actions">
-                                <button class="btn-edit" (click)="openEditMenu(menu)">✏️</button>
-                                <button class="btn-delete" (click)="deleteMenu(menu)">🗑️</button>
-                            </td>
-                        </tr>
-                        }
+                        <!-- Renderizado desde TS -->
                     </tbody>
                 </table>
             </div>
-            }
-
-            @if (!menuLoading && menus.length === 0) {
-            <p class="section-desc" style="margin-top: 24px;">No hay menús creados todavía.</p>
-            }
         </div>
 
         <!-- RESERVAS -->

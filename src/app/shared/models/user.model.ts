@@ -5,3 +5,13 @@ export interface User {
     email: string; // Correo del usuario
     role: 'ADMIN' | 'CLIENT'; // Tipo de usuario
 }
+
+export interface RegisterResponse {
+    success: boolean;
+    message: string;
+    userId?: number; // opcional si el backend devuelve el ID del usuario
+}
+
+export interface DeleteResponse {
+    detail: string;
+}

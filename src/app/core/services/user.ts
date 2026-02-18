@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../../shared/models/user.model';
+import { DeleteResponse, User } from '../../shared/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class UserService {
   }
 
   /** Borrar usuario */
-  deleteUser(userId: number): Observable<any> {
-    return this.http.delete(`${this.API_BASE}/users/${userId}/`);
+  deleteUser(userId: number): Observable<DeleteResponse> {
+    return this.http.delete<DeleteResponse>(`${this.API_BASE}/users/${userId}/`);
   }
 }

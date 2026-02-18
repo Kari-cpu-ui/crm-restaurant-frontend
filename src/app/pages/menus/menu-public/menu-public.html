@@ -6,7 +6,7 @@
     <a routerLink="/review" routerLinkActive="active">Reseñas</a>
     <a routerLink="/sobre-nosotros" routerLinkActive="active">Sobre nosotros</a>
     @if (isAdmin()) {
-      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    <a routerLink="/admin" routerLinkActive="active">Admin</a>
     }
   </div>
   <div class="nav-right">
@@ -33,10 +33,8 @@
       <img [src]="menu().image_url" [alt]="menu().name" style="max-width:500px; border-radius:8px;" />
 
     </p>
-    <button class="btn-reserva" (click)="hacerReserva()">RESERVA</button>
   </div>
   }@else {
   <p>Aquí aparecerá el menú del día cuando seleccionas una fecha.</p>
-  <button class="btn-reserva" (click)="hacerReserva()">RESERVA</button>
   }
 </div>

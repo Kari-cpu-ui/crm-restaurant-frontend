@@ -64,7 +64,7 @@ export class MisReservasComponent {
     this.router.navigate(['/review'], { queryParams: { code } });
   }
 
-
+  // Funciones de autenticación
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/']);

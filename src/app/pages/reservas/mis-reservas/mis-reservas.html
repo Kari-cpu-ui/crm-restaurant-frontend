@@ -6,7 +6,7 @@
     <a routerLink="/review" routerLinkActive="active">Reseñas</a>
     <a routerLink="/sobre-nosotros" routerLinkActive="active">Sobre nosotros</a>
     @if (isAdmin()) {
-      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    <a routerLink="/admin" routerLinkActive="active">Admin</a>
     }
   </div>
   <div class="nav-right">
@@ -19,21 +19,23 @@
     <h2>Mis Reservas</h2>
 
     @for (reserva of arrReservas(); track reserva.id) {
-      <div class="reserva-card">
-        <div class="reserva-info">
-          <p><strong>Código de Reserva:</strong> {{ reserva.reservation_code }}</p>
-          <p><strong>Hora:</strong> {{ reserva.time }}</p>
-          <p><strong>Fecha:</strong> {{ reserva.date }}</p>
-          <p><strong>Personas:</strong> {{ reserva.guests }}</p>
-        </div>
-        <div class="reserva-actions">
-          <button type="button" class="btn-reserva-small" (click)="cancelarReserva(reserva.id)">Cancelar</button>
-          <button type="button" class="btn-review" (click)="dejarResena(reserva.reservation_code)">Dejar reseña</button>
-        </div>
+    <div class="reserva-card">
+      <div class="reserva-info">
+        <p><strong>Código de Reserva:</strong> {{ reserva.reservation_code }}</p>
+        <p><strong>Hora:</strong> {{ reserva.time }}</p>
+        <p><strong>Fecha:</strong> {{ reserva.date }}</p>
+        <p><strong>Personas:</strong> {{ reserva.guests }}</p>
       </div>
+      <div class="reserva-actions">
+        <button type="button" class="btn-reserva-small" (click)="cancelarReserva(reserva.id)">Cancelar</button>
+        <button type="button" class="btn-review" (click)="dejarResena(reserva.reservation_code)">Dejar reseña</button>
+      </div>
+    </div>
     } @empty {
-      <p>No tienes reservas.</p>
-      <button class="btn-reserva" (click)="hacerReserva()">RESERVA</button>
+    <p>No tienes reservas.</p>
     }
   </div>
+  @if (isLogged()) {
+  <button class="btn-reserva" (click)="hacerReserva()">RESERVA</button>
+  }
 </section>
