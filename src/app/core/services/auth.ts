@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { RegisterResponse } from '../../shared/models/user.model';
+import { API_BASE_URL } from '../../app.config';
 
 interface LoginResponse {
   access_token: string;
@@ -16,7 +17,7 @@ interface LoginResponse {
 })
 export class AuthService {
 
-  private apiUrl = 'http://127.0.0.1:8000/users/auth';
+  private apiUrl = `${API_BASE_URL}/users/auth`;
 
   constructor(private http: HttpClient, private router: Router) { }
 
